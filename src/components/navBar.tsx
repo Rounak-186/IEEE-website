@@ -1,13 +1,29 @@
 "use client";
 import React from 'react'
 import { Button } from './ui/button';
+import clsx from 'clsx';
+import { usePathname, useRouter } from 'next/navigation';
+import { log } from 'console';
 
-export default function NavBar() {
+type NavBarProps = {
+    navOpts?: Record<string, string>[]
+}
+
+export default function NavBar({ navOpts }: NavBarProps) {
+
+    const router = useRouter();
+    const path = usePathname();
+    const currentPage = path.split('/')[1];
+
+    const handleLinkClick = (path: string) => {
+        router.push(path);
+        console.log(path);
+    };
 
     // Mock data
     const navOpt = [
         {
-            key: 'home', label: 'Home'
+            key: '', label: 'Home'
         },
         {
             key: 'about', label: 'About'
@@ -46,7 +62,7 @@ export default function NavBar() {
             {/* other navigation options */}
             <div className='flex items-center justify-center gap-1 px-4'>
                 {navOpt.map((opt) => (
-                    <Button variant='nav' key={opt.key} className='p-2'>
+                    <Button variant='nav' key={opt.key} className={clsx('p-2')} active={opt.key === currentPage} onClick={() => handleLinkClick(`/${opt.key}`)}>
                         {opt.label}
                     </Button>
                 ))}

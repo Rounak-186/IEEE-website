@@ -19,7 +19,7 @@ export const Button = ({ children, className, disabled, active, onClick, variant
     }
 
     return (
-        <button className={clsx('hover:brightness-120 disabled:brightness-70 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 rounded-xl', 'flex items-center gap-2  px-4 py-2 border-1 border-transparent', active && '', variants[variant], className)}>
+        <button className={clsx('hover:brightness-120 disabled:brightness-70 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 rounded-xl', 'flex items-center gap-2  px-4 py-2 border-1 border-transparent', active && '!bg-[var(--primary)] text-white', variants[variant], className)} onClick={onClick}>
             {children}
         </button>
     )
