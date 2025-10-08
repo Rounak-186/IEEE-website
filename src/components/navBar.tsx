@@ -1,4 +1,5 @@
 "use client";
+
 import React from 'react'
 import { Button } from './ui/button';
 import clsx from 'clsx';
@@ -45,6 +46,7 @@ export default function NavBar({ navOpts }: NavBarProps) {
         }
     ]
 
+    if (path.includes('/admin')) return null;
     return (
         <div className='w-full flex items-center justify-between px-2 py-1 bg-[var(--background)] text-[var(--foreground)] border-b-4 border-[var(--primary)]'>
             {/* IEEE logo and name */}

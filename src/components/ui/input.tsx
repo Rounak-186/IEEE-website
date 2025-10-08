@@ -60,7 +60,7 @@ export const Input = ({ placeholder, value, type = 'text', onChange, id, require
                 type={inputType}
                 onChange={(e) => handleChange(e)}
                 onFocus={handleFocus} onBlur={handleBlur}
-                className={clsx('w-full py-2 px-4 outline-none border border-[var(--primary)] rounded-md bg-[var(--card)]', 'focus-visible:ring-[var(--accent)] focus-visible:ring-[3px] rounded-md')} />
+                className={clsx('w-full py-2 px-4 outline-none border border-[var(--primary)] rounded-md', 'focus-visible:ring-[var(--accent)] focus-visible:ring-[3px] rounded-md')} />
             {type === 'password' &&
                 <label htmlFor={uid} className='text-[var(--primary)] absolute right-3' onClick={() => setShowPassword(!showPassword)}>{showPassword ? <Eye /> : <EyeClosed />}
                 </label>
