@@ -1,9 +1,10 @@
-"use client";
+"use client"
 
 import React from 'react'
 
-export default function EventsPage() {
+export default function EventPage() {
   return (
-    <div>EventsPage</div>
+    <div>EventPage</div>
   )
 }
+
