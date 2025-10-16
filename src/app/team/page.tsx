@@ -68,9 +68,9 @@ export default function EventsPage() {
 
 
   return (
-    <div className='grid grid-cols-3 gap-8 mx-auto p-20'>
+    <div className='grid grid-cols-4 gap-10 mx-auto p-20'>
       {mockTeamMembers.map((member, index) => (
-        <TeamMemberCard name={member.name} role={member.role} year={member.year} department={member.department} coverImage={member.coverImage} key={index} />
+        <TeamMemberCard name={member.name} role={member.role} coverImage={member.coverImage} key={index} />
       ))}
     </div>
   )
