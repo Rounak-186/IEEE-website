@@ -46,8 +46,9 @@ export default function EventPage() {
 
   return (
     <div className=''>
-      <div className='page-title-box'>
-        <h1 className='text-4xl font-bold text-white p-10'>Our Events</h1>
+      <div className='page-title-box mb-8'>
+        <h1 className='text-5xl font-bold text-white mb-2'>IEEE Events</h1>
+        <p className='text-gray-300 text-lg'>Join us for cutting-edge conferences, workshops, and networking events that shape the future of technology.</p>
       </div>
       <div className='max-w-6xl  mx-auto w-full flex flex-wrap gap-10 items-center justify-center p-20'>
         {mockEvents.map((event, index) => (
@@ -57,4 +58,3 @@ export default function EventPage() {
     </div>
   )
 }
-

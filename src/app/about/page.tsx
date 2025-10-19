@@ -74,7 +74,7 @@ export default function AboutPage() {
         <h1 className='text-5xl font-bold text-white mb-4'>
           About IEEE
         </h1>
-        <h4 className='text-center text-xl  text-white px-10'>
+        <h4 className='text-center text-lg  text-gray-300 '>
           The Institute of Electrical and Electronics Engineers (IEEE) is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.
         </h4>
       </div>

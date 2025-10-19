@@ -1,6 +1,9 @@
 "use client"
 
 import React from 'react';
+import { Button } from './button';
+import { Card } from './card';
+import { ChevronsRight } from 'lucide-react';
 
 type EventCardProps = {
     title: string,
@@ -11,13 +14,13 @@ type EventCardProps = {
 
 export default function EventCard({ title, date, description, coverImage }: EventCardProps) {
     return (
-        <div className='shadow-card hover:shadow-[var(--primary)/30] w-full max-w-md h-fit rounded-lg hover:scale-[1.02] hover:-translate-x-[5px] hover:-translate-y-[5px] transition-all duration-500 border border-gray-300 p-2'>
+        <Card>
 
             {/* Cover Image */}
             <img
-                src={coverImage ?? "https://picsum.photos/400/300"}
+                src={coverImage}
                 alt={`${name} cover`}
-                className='rounded-lg object-cover w-full aspect-square'
+                className='rounded-lg object-cover w-full aspect-[5/3]'
             />
 
             {/* heading and Date */}
@@ -29,6 +32,12 @@ export default function EventCard({ title, date, description, coverImage }: Even
             <div className='p-3'>
                 <p className='text-sm text-gray-600'>{description}</p>
             </div>
-        </div>
+            <div className="member-details flex flex-col justify-evenly bg-transparent shadow-lg/30 rounded-xl absolute left-[50%] -bottom-50 w-fit -translate-x-1/2 h-fit mx-auto z-10">
+                <Button>
+                    Learn More
+                    <ChevronsRight size={17} />
+                </Button>
+            </div>
+        </Card >
     )
 }

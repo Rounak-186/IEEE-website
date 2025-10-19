@@ -5,7 +5,7 @@
 :root {
   --background: #dee7e973;
   --foreground: #121116;
-  --primary: #1c5de9d3;
+  --primary: #4278ec;
   --accent: #a7cdead3;
   --card: #dbf0ff;
 }
@@ -105,7 +105,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3em;
+  padding: 5em;
   background-image: url('/title-bg.jpg');
   background-repeat: no-repeat;
   background-position: center;
