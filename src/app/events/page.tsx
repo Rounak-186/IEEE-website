@@ -1,5 +1,3 @@
-"use client"
-
 import EventCard from '@/components/ui/eventCard';
 import React from 'react'
 
@@ -47,11 +45,15 @@ export default function EventPage() {
 
 
   return (
-    <div className='max-w-6xl flex flex-wrap gap-10 items-center justify-center mx-auto p-20'>
-      {mockEvents.map((event, index) => (
-        <EventCard title={event.title} date={event.date} description={event.description} coverImage={event.coverImage} key={index}/>
-      ))}
-
+    <div className=''>
+      <div className='page-title-box'>
+        <h1 className='text-4xl font-bold text-white p-10'>Our Events</h1>
+      </div>
+      <div className='max-w-6xl  mx-auto w-full flex flex-wrap gap-10 items-center justify-center p-20'>
+        {mockEvents.map((event, index) => (
+          <EventCard title={event.title} date={event.date} description={event.description} coverImage={event.coverImage} key={index} />
+        ))}
+      </div>
     </div>
   )
 }

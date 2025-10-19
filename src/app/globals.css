@@ -43,8 +43,7 @@ body {
 } */
 
 .shadow-card:hover {
-  box-shadow:20px 18px 20px #546ea185;
-;
+  box-shadow:20px 18px 20px #546ea185;;
   transition: box-shadow .3s;
 }
 
@@ -99,4 +98,16 @@ body {
   100% {
     transform: translateY(-3rem);
   }
+}
+
+.page-title-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3em;
+  background-image: url('/title-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }

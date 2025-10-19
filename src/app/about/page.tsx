@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import ieeeImage from '../../assets/image.png';
 import { ShieldCheck, Sparkles, Users, Zap } from 'lucide-react';
@@ -72,8 +70,8 @@ export default function AboutPage() {
   return (
     <div className='w-full flex flex-col justify-center'>
       {/* main heading */}
-      <div className='flex flex-col items-center justify-center p-25 bg-[var(--primary)] gap-2'>
-        <h1 className='text-5xl font-bold text-white'>
+      <div className='page-title-box !py-17'>
+        <h1 className='text-5xl font-bold text-white mb-4'>
           About IEEE
         </h1>
         <h4 className='text-center text-xl  text-white px-10'>

@@ -15,7 +15,7 @@ export const Button = ({ children, className, disabled, active, onClick, variant
     const variants: Record<string, string> = {
         'primary': 'bg-[var(--primary)] text-white',
         'success': 'bg-green-600 text-white',
-        'nav': "bg-transparent text-[var(--foreground)] hover:bg-[#77777740] !rounded-lg active:bg-[var(--primary)] active:text-white",
+        'nav': "bg-transparent text-[var(--foreground)] hover:bg-[#77777740] !rounded-lg active:text-white",
         'outline': "bg-transparent border-[var(--primary)] border-2 rounded-md p-2 "
     }
 

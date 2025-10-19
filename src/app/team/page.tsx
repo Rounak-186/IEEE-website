@@ -1,5 +1,3 @@
-"use client";
-
 import TeamMemberCard from '@/components/ui/teamMemberCard';
 import React from 'react'
 
@@ -68,10 +66,15 @@ export default function EventsPage() {
 
 
   return (
-    <div className='grid grid-cols-4 gap-10 mx-auto p-20'>
-      {mockTeamMembers.map((member, index) => (
-        <TeamMemberCard name={member.name} role={member.role} coverImage={member.coverImage} key={index} />
-      ))}
+    <div>
+      <div className='page-title-box'>
+        <h1 className='text-4xl font-bold text-white p-10'>Meet Our Team</h1>
+      </div>
+      <div className='grid grid-cols-4 gap-10 mx-auto p-20'>
+        {mockTeamMembers.map((member, index) => (
+          <TeamMemberCard name={member.name} role={member.role} coverImage={member.coverImage} key={index} />
+        ))}
+      </div>
     </div>
   )
 }
