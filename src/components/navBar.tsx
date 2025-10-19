@@ -83,32 +83,34 @@ export default function NavBar({ navOpts }: NavBarProps) {
 
     if (path.includes('/admin')) return null;
     return (
-        <div className={clsx('w-full flex items-center justify-between px-2 py-1 bg-white/50 backdrop-blur-2xl text-[var(--foreground)] border-b-2 border-[var(--primary)] fixed top-0 z-50 transition-transform duration-300', isNavShow ? "translate-y-[0px]" : "-translate-y-[80px]")}>
-            {/* IEEE logo and name */}
-            <div className="flex items-center justify-center gap-2 ml-4">
-                {/* logo */}
-                <img src="/ieee-logo.png" alt="IEEE Logo" className='w-13 h-13 object-contain' />
-                {/* name */}
-                <div>
-                    <h5 className={clsx('text-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400', playwriteUSModern.className)}>JGEC IEEE</h5>
-                    <h6 className={clsx('text-sm font-bold  text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-400', playwriteUSModern.className)}>Student Branch</h6>
+        <header className="h-[60px]">
+            <div className={clsx('w-full flex items-center justify-between px-2 py-1 bg-white/50 backdrop-blur-2xl text-[var(--foreground)] border-b-2 border-[var(--primary)] fixed top-0 z-50 transition-transform duration-300', isNavShow ? "translate-y-[0px]" : "-translate-y-[80px]")}>
+                {/* IEEE logo and name */}
+                <div className="flex items-center justify-center gap-2 ml-4">
+                    {/* logo */}
+                    <img src="/ieee-logo.png" alt="IEEE Logo" className='w-13 h-13 object-contain' />
+                    {/* name */}
+                    <div>
+                        <h5 className={clsx('text-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-teal-600', playwriteUSModern.className)}>JGEC IEEE</h5>
+                        <h6 className={clsx('text-sm font-bold  text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-400', playwriteUSModern.className)}>Student Branch</h6>
+                    </div>
+                </div>
+                {/* other navigation options */}
+                <div className='flex items-center justify-center gap-1 px-4'>
+                    {navOpt.map((opt) => (
+                        <div className='flex flex-col justify-end items-center' key={opt.key}>
+                            <Button variant='nav' key={opt.key} className={clsx('p-2 text-gray-600', currentPage === opt.key && "!text-foreground")} onClick={() => handleLinkClick(`/${opt.key}`)}>
+                                {opt.label}
+                            </Button>
+                            <div className={clsx('overflow-hidden flex items-center gap-[1px] w-0 h-1 absolute transition-all duration-300 rounded-t-2xl', currentPage === opt.key && "w-17")}>
+                                <div className='flex-1 bg-blue-600 w-full h-full' />
+                                <div className='flex-4 bg-blue-600 w-full h-full' />
+                                <div className='flex-1 bg-blue-600 w-full h-full' />
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
-            {/* other navigation options */}
-            <div className='flex items-center justify-center gap-1 px-4'>
-                {navOpt.map((opt) => (
-                    <div className='flex flex-col justify-end items-center' key={opt.key}>
-                        <Button variant='nav' key={opt.key} className={clsx('p-2')} onClick={() => handleLinkClick(`/${opt.key}`)}>
-                            {opt.label}
-                        </Button>
-                        <div className={clsx('overflow-hidden flex items-center gap-[1px] w-0 h-1 absolute transition-all duration-300 rounded-t-2xl', currentPage === opt.key && "w-17")}>
-                            <div className='flex-1 bg-blue-600 w-full h-full' />
-                            <div className='flex-4 bg-blue-600 w-full h-full' />
-                            <div className='flex-1 bg-blue-600 w-full h-full' />
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
+        </header>
     )
 }

@@ -35,9 +35,7 @@ export default function RootLayout({
         className={`${ubuntu} antialiased`}
       >
         {/* NavBar */}
-        <header className="h-[60px]">
-          <NavBar />
-        </header>
+        <NavBar />
         <main>
           {children}
         </main>
