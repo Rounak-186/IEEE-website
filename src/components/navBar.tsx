@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { Playwrite_US_Modern } from "next/font/google"
+import Link from 'next/link';
 
 const playwriteUSModern = Playwrite_US_Modern({
     variable: "--font-playwrite-us-modern",
@@ -94,7 +95,9 @@ export default function NavBar({ navOpts, className, isVisible = true }: NavBarP
     return (
         <div className={clsx('w-full flex items-center justify-between px-2 py-1 bg-white/50 backdrop-blur-2xl text-[var(--foreground)] border-b-2 border-[var(--primary)] transition-transform duration-300', className)}>
             {/* IEEE logo and name */}
-            <FullLogoComponent />
+            <Link href={'/'}>
+                <FullLogoComponent />
+            </Link>
             {/* other navigation options */}
             <div className='flex items-center justify-center gap-1 px-4'>
                 {navOpt.map((opt) => (

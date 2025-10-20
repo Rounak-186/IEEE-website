@@ -13,6 +13,9 @@ const NavbarContext = createContext<NavContextPropsType | undefined>(undefined);
 export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
     const [isShowHeaderNav, setIsShowHeaderNav] = useState(pathname !== '/');
+    useEffect(() => {
+        setIsShowHeaderNav(pathname !== '/');
+    }, [pathname]);
     return (
         <NavbarContext.Provider value={{ isShowHeaderNav, setIsShowHeaderNav }}>
             {children}
