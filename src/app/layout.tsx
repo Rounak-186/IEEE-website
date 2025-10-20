@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/navBar";
+import { NavbarProvider } from "@/context/navbarContext";
+import { HeaderNav } from "@/components/HeaderNav";
+import { Footer } from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +37,16 @@ export default function RootLayout({
       <body
         className={`${ubuntu} antialiased`}
       >
-        {/* NavBar */}
-        <NavBar />
-        <main>
-          {children}
-        </main>
+        <NavbarProvider>
+          {/* NavBar */}
+          <HeaderNav />
+          <main>
+            {children}
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+        </NavbarProvider>
       </body>
     </html>
   );
