@@ -6,7 +6,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET!,
 });
 
-const CLOUD_FOLDER = 'money_manager_profile'
+const CLOUD_FOLDER = 'ieee-jgec'
 
 export const uploadToCloudinary = async (buffer: Buffer, filename: string): Promise<{ url: string; public_id: string }> => {
     return new Promise((resolve, reject) => {
