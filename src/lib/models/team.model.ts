@@ -1,13 +1,25 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
 
 const teamSchema = new Schema({
     title: {
         type: String,
         required: true
+    },
+    createdBy: {
+        type: mongoose.Types.ObjectId
+    },
+    teamType: {
+        type: String,
+        enum: ['college', 'alumni'],
+        default: "college"
     }
 }, { timestamps: true });
 
 const teamMemberSchema = new Schema({
+    teamId: {
+        type: mongoose.Types.ObjectId,
+        ref: "Team"
+    },
     name: {
         type: String,
         required: true
