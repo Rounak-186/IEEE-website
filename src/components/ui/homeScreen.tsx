@@ -571,9 +571,9 @@ export default function IEEEInteractiveCanvas() {
             }
 
             // Occasionally spawn new collision particles randomly
-            if (Math.random() < 0.03) {
-                collisionParticles.push(new CollisionParticle());
-            }
+            // if (Math.random() < 0.03) {
+            //     collisionParticles.push(new CollisionParticle());
+            // }
 
             // Update and draw hex grid
             hexGrid.update(mouseRef.current.x, mouseRef.current.y);
@@ -603,7 +603,7 @@ export default function IEEEInteractiveCanvas() {
             });
 
             // Spawn data packets - less frequent
-            if (frameCount % 50 === 0 && circuitNodes.length > 0) {
+            if (frameCount % 100 === 0 && circuitNodes.length > 0) {
                 const randomNode = circuitNodes[Math.floor(Math.random() * circuitNodes.length)];
                 if (randomNode.connections.length > 0) {
                     const target = randomNode.connections[Math.floor(Math.random() * randomNode.connections.length)];
@@ -641,10 +641,10 @@ export default function IEEEInteractiveCanvas() {
 
             energyWaves.push(new EnergyWave(x, y));
 
-            // Add collision particles burst at click location
-            for (let i = 0; i < 20; i++) {
-                collisionParticles.push(new CollisionParticle(x, y));
-            }
+            // // Add collision particles burst at click location
+            // for (let i = 0; i < 20; i++) {
+            //     collisionParticles.push(new CollisionParticle(x, y));
+            // }
 
             // Add new circuit node at click
             const newNode = new CircuitNode(x, y);
@@ -659,7 +659,7 @@ export default function IEEEInteractiveCanvas() {
             });
             circuitNodes.push(newNode);
 
-            // Create burst of data packets - reduced amount
+            // // Create burst of data packets - reduced amount
             for (let i = 0; i < 3; i++) {
                 if (newNode.connections.length > 0) {
                     const target = newNode.connections[Math.floor(Math.random() * newNode.connections.length)];
