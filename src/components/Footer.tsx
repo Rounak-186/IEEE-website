@@ -20,16 +20,6 @@ export const Footer = () => {
                 </div>
 
                 <div>
-                    <h3 className="mb-4">Resources</h3>
-                    <ul className="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" className="hover:text-white transition-colors">IEEE Xplore</a></li>
-                        <li><a href="#" className="hover:text-white transition-colors">Career Center</a></li>
-                        <li><a href="#" className="hover:text-white transition-colors">Learning Network</a></li>
-                        <li><a href="#" className="hover:text-white transition-colors">Conferences</a></li>
-                    </ul>
-                </div>
-
-                <div>
                     <h3 className="mb-4">Connect With Us</h3>
                     <div className="flex space-x-4 mb-4">
                         <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -46,6 +36,17 @@ export const Footer = () => {
                     <p className="text-sm text-gray-400">
                         Follow us for updates on events, news, and opportunities.
                     </p>
+                </div>
+
+                <div className="">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1854.661167753566!2d88.7024545341968!3d26.545891844637556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e47bce687f169d%3A0x4152036d0d736d37!2sJalpaiguri%20Government%20Engineering%20College!5e0!3m2!1sen!2sin!4v1761029430201!5m2!1sen!2sin"
+                        className='w-full h-[200px]'
+                        allowFullScreen={false}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    >
+                    </iframe>
                 </div>
             </div>
             <div className='text-center w-full border-t-1 border-gray-700 pt-12'>
