@@ -1,6 +1,10 @@
 "use client";
 
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Select } from '@/components/ui/select';
+import { TextArea } from '@/components/ui/textArea';
+import { Instagram, Linkedin, Mail, MailCheck, Phone } from 'lucide-react';
 import React, { useState } from 'react'
 
 export default function ContactPage() {
@@ -17,14 +21,6 @@ export default function ContactPage() {
     setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    // replace with real submit logic (API call / email)
-    console.log("Contact form submitted:", form);
-    // simple clear
-    setForm({ firstName: "", lastName: "", email: "", subject: "", message: "" });
-  }
-
   return (
     <div>
       <div className='page-title-box mb-8'>
@@ -32,88 +28,131 @@ export default function ContactPage() {
         <p className='text-gray-300 text-lg'>Get in touch with IEEE Student Branch. We're here to help with your questions, ideas, and collaboration opportunities.</p>
       </div>
       {/* form and contact info*/}
-      <div className='flex gap-2 flex-wrap'>
+      <div className='flex gap-8 flex-wrap p-20 mx-auto justify-center'>
         {/* form */}
-        {/* form card */}
-        <div className="w-full max-w-3xl bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-          <form onSubmit={handleSubmit} aria-label="Contact form">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2" htmlFor="firstName">First Name</label>
+        <div className="flex flex-col gap-6 max-w-2xl w-full">
+          <h3 className='text-3xl mb-2'>Send Us a Message</h3>
+          {/* form card */}
+          <div className="w-full max-w-3xl bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+            <form aria-label="Contact form">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-2" htmlFor="firstName">First Name</label>
+                  <Input
+                    id="firstName"
+                    value={form.firstName}
+                    placeholder="Enter your first name"
+                    className="w-full placeholder-gray-400 rounded-lg outline-none"
+                    placeholderClass="bg-white"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-2" htmlFor="lastName">Last Name</label>
+                  <Input
+                    id="lastName"
+                    value={form.lastName}
+                    placeholder="Enter your last name"
+                    className="w-full placeholder-gray-400 rounded-lg outline-none"
+                    placeholderClass="bg-white"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-semibold mb-2" htmlFor="email">Email Address</label>
                 <Input
-                  id="firstName"
-                  value={form.firstName}
-                  placeholder="Enter your first name"
-                  className="w-full bg-gray-100 placeholder-gray-400 rounded-lg py-3 px-4 outline-none"
+                  id="email"
+                  type="email"
+                  value={form.email}
+                  placeholder="Enter your email"
+                  className="w-full placeholder-gray-400 rounded-lg outline-none"
+                  placeholderClass="bg-white"
                   required
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2" htmlFor="lastName">Last Name</label>
-                <Input
-                  id="lastName"
-                  
-                  value={form.lastName}
-                  
-                  placeholder="Enter your last name"
-                  className="w-full bg-gray-100 placeholder-gray-400 rounded-lg py-3 px-4 outline-none"
+              <div className="mb-4">
+                <label className="block text-sm font-semibold mb-2" htmlFor="subject">Subject</label>
+                <Select
+                  id="subject"
+                  name="subject"
+                  value={form.subject}
+                  placeholder='Select a subject'
+                  placeholderClass='!bg-white'
+                  options={["General question", "Events & workshops", "Membership", "Collaboration"]}
+                  className="w-full placeholder-gray-400 rounded-lg py-3 px-4 outline-none appearance-none"
                   required
                 />
               </div>
-            </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2" htmlFor="email">Email Address</label>
-              <Input
-                id="email"
-                type="email"
-                value={form.email}
-                placeholder="Enter your email"
-                className="w-full bg-gray-100 placeholder-gray-400 rounded-lg py-3 px-4 outline-none"
-                required
-              />
-            </div>
+              <div className="mb-6">
+                <label className="block text-sm font-semibold mb-2" htmlFor="message">Message</label>
+                <TextArea
+                  id="message"
+                  value={form.message}
+                  placeholder="Write your message"
+                  rows={8}
+                  className="w-full placeholder-gray-400 rounded-lg py-4 px-4 outline-none resize-vertical"
+                  placeholderClass="bg-white"
+                  required
+                />
+              </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2" htmlFor="subject">Subject</label>
-              <select
-                id="subject"
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
-                className="w-full bg-gray-100 placeholder-gray-400 rounded-lg py-3 px-4 outline-none appearance-none"
-                required
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl"
               >
-                <option value="">Select a subject</option>
-                <option value="general">General question</option>
-                <option value="events">Events & workshops</option>
-                <option value="membership">Membership</option>
-                <option value="collaboration">Collaboration</option>
-              </select>
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+        {/* contact and follow */}
+        <div>
+          <div className="flex flex-col gap-6 max-w-xl w-full">
+            <h3 className='text-3xl mb-2'>Get in Touch</h3>
+          </div>
+          {/* contact details */}
+          <div className="flex flex-col gap-4 w-full py-6">
+            <div className='w-full max-w-md h-fit rounded-lg  border border-gray-300 member-card flex justify-center relative overflow-hidden bg-white p-4 flex-row gap-4 pr-30'>
+              {/* icon */}
+              <div className='text-[var(--primary)] flex justify-center p-1'>
+                <Mail />
+              </div>
+              <div className='flex flex-col justify-center gap-2 '>
+                <h4 className='text-xl'>General Enquiries</h4>
+                {/* mail */}
+                <div className="flex gap-2 items-center">
+                  <span className='text-gray-700'>
+                    <Mail size={18} />
+                  </span>
+                  <a href="mailto:"><span className="text-gray-700">example@gmail.com</span></a>
+                </div>
+                {/* contact */}
+                <div className="flex gap-2 items-center">
+                  <span className='text-gray-700'>
+                    <Phone size={18} />
+                  </span>
+                  <span className="text-gray-700">9434xxxxxxx</span>
+                </div>
+              </div>
             </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-semibold mb-2" htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                placeholder="Write your message"
-                rows={8}
-                className="w-full bg-gray-100 placeholder-gray-400 rounded-lg py-4 px-4 outline-none resize-vertical"
-                required
-              />
+            <div className='w-full max-w-md h-fit rounded-lg  border border-gray-300 member-card flex justify-center relative overflow-hidden bg-white p-4 flex-col gap-4 pr-30'>
+              <h4 className='text-xl'>Follow Us</h4>
+              {/* Social media icons */}
+              <div className='flex items-center justify-start gap-4'>
+                <a href={"#"} target="_blank" rel="noopener noreferrer" className='flex items-center justify-center w-8 h-8 rounded-lg text-gray-600 hover:text-blue-700'>
+                  <span><Linkedin size={24} /></span>
+                </a>
+                <a href={"#"} target="_blank" rel="noopener noreferrer" className='flex items-center justify-center w-8 h-8 rounded-lg text-gray-600 hover:text-pink-500'>
+                  <span><Instagram size={24} /></span>
+                </a>
+              </div>
             </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl"
-            >
-              Send Message
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
