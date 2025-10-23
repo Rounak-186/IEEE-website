@@ -85,9 +85,6 @@ export default function NavBar({ navOpts, className, isVisible = true }: NavBarP
             key: 'contact', label: 'Contact'
         },
         {
-            key: 'sponsors', label: 'Sponsors'
-        },
-        {
             key: 'alumni', label: 'Alumni'
         }
     ];

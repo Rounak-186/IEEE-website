@@ -13,9 +13,10 @@ type InputProps = {
     required?: boolean,
     disabled?: boolean,
     placeholderClass?: string
+    className?:string
 }
 
-export const Input = ({ placeholder, value, type = 'text', onChange, id, required, disabled, placeholderClass }: InputProps) => {
+export const Input = ({ placeholder, value, type = 'text', onChange, id, required, disabled, placeholderClass, className }: InputProps) => {
 
     // states for input 
     const [input, setInput] = useState<string>(value || "");
@@ -48,7 +49,7 @@ export const Input = ({ placeholder, value, type = 'text', onChange, id, require
     const uid = id || Math.random().toString(36).substring(2, 15);
 
     return (
-        <div className={clsx('w-full flex items-center relative  box ')}>
+        <div className={clsx('w-full flex items-center relative  box ', className)}>
             <label
                 htmlFor={uid}
                 className={clsx('absolute ml-3 transition-all duration-300 px-1 text-[var(--primary)] ', (isFocused || input != "") && '-translate-y-5 scale-90 bg-[var(--background)]', placeholderClass)}>
