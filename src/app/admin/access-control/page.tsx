@@ -5,11 +5,9 @@ import axios from 'axios';
 import { Edit, Pen, Plus } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 
-export default function AccessPage() {
+export default function AccessPage() {1
     const { user } = useAuth();
     const isAdminRole = user?.role === "admin";
-
-
 
     // get user list
     const [userList, setUserList] = useState<Record<string, any>[] | null>(null);
