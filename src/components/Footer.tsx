@@ -1,8 +1,16 @@
+"use client"
+
 import clsx from 'clsx'
 import React from 'react'
 import { FullLogoComponent } from './navBar'
+import { usePathname } from 'next/navigation'
 
 export const Footer = () => {
+    const pathName = usePathname();
+
+    if (pathName?.includes('/admin')) {
+        return null;
+    }
     return (
         <div className='h-fit w-full bg-gray-800 p-6 py-12 text-white'>
             <div className='mb-15 grid grid-cols-1 md:grid-cols-4 gap-8'>

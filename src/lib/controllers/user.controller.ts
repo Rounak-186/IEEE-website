@@ -191,9 +191,9 @@ export const genearteResetPasswordToken = asyncHandler(async (req: NextRequest) 
 
     const emailHtml = `
     <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px; padding: 32px 24px; background: #fafbfc;">
-      <h2 style="color: #1a202c; margin-bottom: 16px;">Reset your Buckwise password</h2>
+      <h2 style="color: #1a202c; margin-bottom: 16px;">Reset your IEEE JGEC Admin password</h2>
       <p style="color: #333; margin-bottom: 24px;">
-        We received a request to reset your Buckwise account password. Click the button below to set a new password. This link will expire in <b>1 hour</b>.
+        We received a request to reset your IEEE JGEC Admin account password. Click the button below to set a new password. This link will expire in <b>1 hour</b>.
       </p>
       <a href="${process.env.CORS_ORIGIN}/update-password/reset?token=${token}" style="display: inline-block; background: #2563eb; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: bold; margin-bottom: 20px;">
         Reset Password
@@ -209,12 +209,12 @@ export const genearteResetPasswordToken = asyncHandler(async (req: NextRequest) 
       </p>
       <hr style="margin: 32px 0 16px 0; border: none; border-top: 1px solid #eee;">
       <div style="color: #aaa; font-size: 12px; text-align: center;">
-        &copy; ${new Date().getFullYear()} Buckwise
+        &copy; ${new Date().getFullYear()} IEEE JGEC Admin
       </div>
     </div>
     `
     await sendMail({
-        subject: "Reset your Buckwise password",
+        subject: "Reset your IEEE JGEC Admin password",
         sendTo: email,
         html: emailHtml
     });
@@ -264,3 +264,28 @@ export const getCurrentUser = asyncHandler(async (req: NextRequest, context: Mid
 
     return NextResponse.json(new ApiResponse(200, user, "User fetched"));
 });
+
+// get user list
+export const getAllUsers = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
+    const { userId } = context!;
+    const userObjId = new mongoose.Types.ObjectId(userId);
+
+    const userList = await User.aggregate([
+        {
+            $match: {
+                _id: { $ne: userObjId }
+            }
+        },
+        {
+            $project: {
+                _id: 1,
+                userName: 1,
+                email: 1,
+                role: 1,
+                createdAt: 1
+            }
+        }
+    ]);
+
+    return NextResponse.json(new ApiResponse(200, userList, "Users fetched"));
+})

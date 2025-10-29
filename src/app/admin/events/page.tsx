@@ -1,9 +1,12 @@
+"use client";
+
 import { Button } from '@/components/ui/button'
 import { Calendar, Pencil, Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function EventAdminPage() {
-
+    const router = useRouter();
     return (
         <div>
             <div className='mb-10'>
@@ -12,7 +15,7 @@ export default function EventAdminPage() {
             </div>
             <div className='space-y-6'>
                 <div>
-                    <Button variant='primary'>
+                    <Button variant='primary' onClick={()=>router.push("/admin/events/event?mode=create")}>
                         <Plus size={15} />
                         Create new Event
                     </Button>
