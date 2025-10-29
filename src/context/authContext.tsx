@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 })
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                toast.error(error.response?.data)
+                toast.error(error.response?.data?.message)
             } else {
                 toast.error("Something went wrong")
             }

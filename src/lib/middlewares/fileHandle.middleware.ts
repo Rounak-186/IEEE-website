@@ -4,8 +4,8 @@ import { MiddlewareContext } from "../../../types/middleware";
 export const fileHandle = async (req: NextRequest, context: MiddlewareContext): Promise<MiddlewareContext> => {
     const contentType = req.headers.get('content-type') || '';
     if (!contentType.includes('multipart/form-data')) return context;
-
-    const formData = await req.formData();
+    const clonedReq = req.clone();
+    const formData = await clonedReq.formData();
     const files: Record<string, File> = {};
 
     for (const [key, value] of formData.entries()) {

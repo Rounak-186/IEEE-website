@@ -5,11 +5,13 @@ import { ApiError } from "../utils/error-handler";
 import { Event } from "../models/event.model";
 import { deleteFromCloudinary, uploadToCloudinary } from "../utils/coludinary-upload";
 import { ApiResponse } from "../utils/response-handler";
+import { formDataToJson } from "../utils/formdata-converter";
 
 // create event
 export const createEvent = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
-    const { title, description, date, time, location, eventType, navLink } = await req.json();
+    const formData = await req.formData();
+    const { title, description, date, time, location, eventType, navLink } = formDataToJson(formData);
 
     if (!title || !description) throw new ApiError(400, "Title and description is required");
 
@@ -51,9 +53,10 @@ export const getEvent = asyncHandler(async (req: NextRequest, context: Middlewar
 // update event
 export const updateEvent = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
-    const { eventId, title, description, date, time, location, eventType, navLink } = await req.json();
+    const formData = await req.formData();
+    const { eventId, title, description, date, time, location, eventType, navLink } = formDataToJson(formData);
 
-    if (!title || !description) throw new ApiError(400, "Title and description is required");
+    if (!title || !description || !eventId) throw new ApiError(400, "Title and description is required");
 
     // thumbnail handle
     let thumbnailUrl = "";
@@ -97,4 +100,11 @@ export const deleteEvent = asyncHandler(async (req: NextRequest, context: Middle
     await Event.findByIdAndDelete(eventId);
 
     return NextResponse.json(new ApiResponse(200, {}, "Event removed"));
+});
+
+// fetch all events
+export const getAllEvents = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
+    const events = await Event.find().sort({ createdAt: -1 });
+
+    return NextResponse.json(new ApiResponse(200, events, "Events fetched"));
 });

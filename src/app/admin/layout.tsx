@@ -5,13 +5,14 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
+import { ToastContainer } from 'react-toastify';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 
     return (
         <AuthProvider>
             <div>
-                <div className='bg-gray-300 w-full sticky top-0 p-2'>
+                <div className='bg-gray-300 w-full sticky top-0 p-2 z-50'>
                     <h5 className='text-xl font-semibold'>IEEE JGEC Admin panel</h5>
                 </div>
                 <div className='flex'>
@@ -22,6 +23,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         {children}
                     </div>
                 </div>
+                <ToastContainer
+                    autoClose={2500}
+                    position='bottom-right'
+                    pauseOnHover={false}
+                />
             </div>
         </AuthProvider>
     )

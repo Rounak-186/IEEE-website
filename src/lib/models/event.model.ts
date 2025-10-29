@@ -10,22 +10,28 @@ const eventSchema = new Schema({
         required: true
     },
     thumbnail: {
-        type: String
+        type: String,
+        default: ""
     },
     date: {
-        type: Date
+        type: String,
+        default: ""
     },
     time: {
-        type: String
+        type: String,
+        default: ""
     },
     location: {
-        type: String
+        type: String,
+        default: ""
     },
     eventType: {
-        type: String
+        type: String,
+        default: ""
     },
     navLink: {
-        type: String
+        type: String,
+        default: ""
     }
 }, { timestamps: true });
 
