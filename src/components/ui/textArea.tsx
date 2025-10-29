@@ -49,7 +49,7 @@ export const TextArea = ({
     <div className={clsx('w-full py-1 h-fit flex relative border border-gray-400 focus-within:border-[var(--primary)] focus-within:ring-[var(--accent)] focus-within:ring-[1px] rounded-2xl transition-all duration-150', className)}>
       <label
         htmlFor={uid}
-        className={clsx('absolute ml-3 mt-2 transition-all duration-200 px-1 text-foreground cursor-text', (isFocused || input != "") && '!text-[var(--primary)] -translate-y-3 scale-80 !ml-1', placeholderClass)}>
+        className={clsx('absolute ml-3 mt-2 transition-all duration-200 px-1 text-foreground cursor-text origin-left', (isFocused || input != "") && '!text-[var(--primary)] -translate-y-3 scale-80', placeholderClass)}>
         {placeholder}
       </label>
       <textarea
@@ -57,7 +57,7 @@ export const TextArea = ({
         value={input}
         onChange={(e) => handleChange(e)}
         onFocus={handleFocus} onBlur={handleBlur}
-        className={clsx('w-full resize-y min-h-20 py-2 px-4 outline-none border-none bg-transparent', (isFocused || input != "") && 'translate-y-2', placeholderClass)}
+        className={clsx('w-full resize-y min-h-20 py-2 px-4 outline-none border-none bg-transparent', (isFocused || input != "") && 'translate-y-2')}
         disabled={disabled}
         rows={rows}
         required={required}

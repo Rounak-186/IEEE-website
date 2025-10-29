@@ -3,9 +3,11 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/authContext';
 import axios from 'axios';
 import { Edit, Pen, Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-export default function AccessPage() {1
+export default function AccessPage() {
+    const router = useRouter();
     const { user } = useAuth();
     const isAdminRole = user?.role === "admin";
 
@@ -43,7 +45,7 @@ export default function AccessPage() {1
             {/* Other Authorised member Details  */}
             <div>
                 {isAdminRole &&
-                    <Button className='mb-5'>
+                    <Button className='mb-5' onClick={() => router.push("/admin/access-control/add-user")}>
                         <Plus size={15} />
                         Add new user
                     </Button>

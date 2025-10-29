@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input'
+import { Select } from '@/components/ui/select';
 import { Selection } from '@/components/ui/selection'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -83,10 +84,11 @@ export default function CreateUserPage() {
                     </div>
                     <div>
                         <div className='mb-2 text-sm'>User Role</div>
-                        <Selection
+                        <Select
                             options={roleOptions}
-                            defaultValue={formData.role}
+                            // defaultValue={formData.role}
                             onChange={value => handleChange(value, 'role')}
+                            placeholder='Select user role'
                         />
                     </div>
                 </form>

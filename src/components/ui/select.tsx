@@ -70,43 +70,41 @@ export const Select = ({
   }
 
   return (
-    <div
-      ref={ref}
-      className={clsx("w-full relative box", className)}
+    <div className="relative"
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
+      ref={ref}
     >
-      <label
-        htmlFor={uid}
-        className={clsx(
-          "absolute ml-3 mt-1 transition-all duration-300 px-1 text-[var(--primary)] z-50",
-          (isFocused || selected !== "") && "-translate-y-4 scale-90 bg-white",
-          placeholderClass
-        )}
-      >
-        {placeholder}
-      </label>
-
       <div
-        id={uid}
-        role="button"
-        tabIndex={disabled ? -1 : 0}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        className={clsx(
-          "w-full py-2 px-4 pr-10 rounded-md border border-[var(--primary)] outline-none flex items-center justify-between cursor-pointer bg-transparent",
-          "focus-visible:ring-[var(--accent)] focus-visible:ring-[3px] relative h-10",
-          disabled && "opacity-50 cursor-not-allowed"
-        )}
-        onClick={() => !disabled && setOpen((s) => !s)}
-        onKeyDown={onKeyDown}
+        className={clsx('w-full py-1 h-fit flex items-center relative border border-gray-400 focus-within:border-[var(--primary)] focus-within:ring-[var(--accent)] focus-within:ring-[1px] rounded-2xl transition-all duration-150', className)}
       >
-        <span className="truncate">{selected === "" ? "" : normalized.find((o) => o.value === selected)?.label ?? selected}</span>
-        <div className="absolute top-1/2 right-4 -translate-y-1/2">
+        <label
+          htmlFor={uid}
+          className={clsx('absolute ml-3 transition-all duration-200 px-1 text-foreground cursor-text z-1 origin-left', (isFocused || selected != "") && '!text-[var(--primary)] -translate-y-3 scale-80', placeholderClass)}
+        >
+          {placeholder}
+        </label>
+
+        <div
+          id={uid}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          className={clsx(
+            'w-full resize-y min-h-10 py-2 px-4 outline-none border-none bg-transparent',
+            (isFocused || selected != "") && 'translate-y-2',
+            disabled && "opacity-50 cursor-not-allowed"
+          )}
+          onClick={() => !disabled && setOpen((s) => !s)}
+          onKeyDown={onKeyDown}
+        >
+          <span className="truncate">{selected === "" ? "" : normalized.find((o) => o.value === selected)?.label ?? selected}</span>
+          <div className="absolute top-1/2 right-4 -translate-y-1/2">
             <ChevronDown size={16} className="text-[var(--primary)]" />
+          </div>
         </div>
       </div>
-
       {/* dropdown */}
       {open && !disabled && (
         <ul
@@ -122,7 +120,7 @@ export const Select = ({
               tabIndex={0}
               className={clsx(
                 "px-4 py-2 hover:bg-[var(--accent)] hover:text-white cursor-pointer",
-                selected === opt.value && "font-semibold"
+                selected === opt.value && "font-semibold bg-[var(--accent)] text-white"
               )}
               onClick={() => selectValue(opt.value)}
               onKeyDown={(e) => {
