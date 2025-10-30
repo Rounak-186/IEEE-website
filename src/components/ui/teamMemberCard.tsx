@@ -14,7 +14,7 @@ type TeamMemberCardProps = {
 
 export default function TeamMemberCard({ name, role, coverImage, linkedInUrl, instagramUrl }: TeamMemberCardProps) {
     return (
-        <Card className=' w-[300px] h-[400px] p-4 rounded-xl'>
+        <Card className=' w-[300px] h-[400px] p-4 rounded-xl bg-gray-100'>
 
             <div className='flex flex-col items-center'>
                 {/* Cover Image */}

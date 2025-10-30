@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
@@ -42,7 +43,6 @@ export default function ContactPage() {
                     id="firstName"
                     value={form.firstName}
                     placeholder="Enter your first name"
-                    className="w-full placeholder-gray-400 rounded-lg outline-none"
                     placeholderClass="bg-white"
                     required
                   />
@@ -54,7 +54,6 @@ export default function ContactPage() {
                     id="lastName"
                     value={form.lastName}
                     placeholder="Enter your last name"
-                    className="w-full placeholder-gray-400 rounded-lg outline-none"
                     placeholderClass="bg-white"
                     required
                   />
@@ -68,7 +67,6 @@ export default function ContactPage() {
                   type="email"
                   value={form.email}
                   placeholder="Enter your email"
-                  className="w-full placeholder-gray-400 rounded-lg outline-none"
                   placeholderClass="bg-white"
                   required
                 />
@@ -83,7 +81,6 @@ export default function ContactPage() {
                   placeholder='Select a subject'
                   placeholderClass='!bg-white'
                   options={["General question", "Events & workshops", "Membership", "Collaboration"]}
-                  className="w-full placeholder-gray-400 rounded-lg py-3 px-4 outline-none appearance-none"
                   required
                 />
               </div>
@@ -95,18 +92,16 @@ export default function ContactPage() {
                   value={form.message}
                   placeholder="Write your message"
                   rows={8}
-                  className="w-full placeholder-gray-400 rounded-lg py-4 px-4 outline-none resize-vertical"
                   placeholderClass="bg-white"
                   required
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl"
+              <Button
+                className="w-full justify-center"
               >
                 Send Message
-              </button>
+              </Button>
             </form>
           </div>
         </div>

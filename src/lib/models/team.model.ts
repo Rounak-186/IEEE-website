@@ -10,15 +10,14 @@ const teamSchema = new Schema({
     },
     teamType: {
         type: String,
-        enum: ['college', 'alumni'],
-        default: "college"
+        enum: ['student', 'faculty', 'alumni'],
+        default: "student"
     }
 }, { timestamps: true });
 
 const teamMemberSchema = new Schema({
     teamId: {
         type: mongoose.Types.ObjectId,
-        ref: "Team"
     },
     name: {
         type: String,
@@ -62,4 +61,4 @@ if (process.env.NODE_ENV === "development" && (models.Team || models.TeamMember)
 }
 
 export const Team = models.Team || model("Team", teamSchema);
-export const TeamMember = models.Team || model("TeamMember", teamMemberSchema); 
+export const TeamMember = models.TeamMember || model("TeamMember", teamMemberSchema); 

@@ -4,11 +4,14 @@ import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { PopupBox } from '@/components/ui/popupBox'
-import { Selection } from '@/components/ui/selection'
+import { Select } from '@/components/ui/select';
+import { objectToFormData } from '@/lib/utils/formdata-converter';
+import axios from 'axios';
 import { Camera } from 'lucide-react'
-import { useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop';
+import { toast } from 'react-toastify';
 
 export default function MemberAddPage() {
     const yearOptions = [
@@ -16,19 +19,25 @@ export default function MemberAddPage() {
         '2nd year',
         '3rd year',
         '4th year',
+        'alumni',
     ];
     const depertmentOptions = [
-        'INFORMATION TECHNOLOGY',
-        'COMPUTER SIENCE',
-        'ELECTRONICS AND COMMUNICATION',
-        'ELECTRICAL ENGINEERING',
-        'MECHANICAL ENGINEERING',
-        'CIVIL ENGINEERING',
+        'IT Department',
+        'CSE Department',
+        'ECE Department',
+        'ELECTRICAL Department',
+        'MECHANICAL Department',
+        'CIVIL Department',
     ];
 
+    const router = useRouter();
+
     // handle tabs
+    const params = useParams();
+    const teamId = params.teamId;
     const searchParams = useSearchParams();
     const tab = searchParams.get('tab');
+    const memberId = searchParams.get('id');
 
     // handle inputs
     const [formData, setFormData] = useState({
@@ -39,9 +48,10 @@ export default function MemberAddPage() {
         depertment: "",
         role: "",
         linkedin: "",
-        instagram: ""
+        instagram: "",
+        avatar: ""
     });
-    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined);
 
     // Handle form changes
     const handleChange = (e: string, field: string) => {
@@ -55,7 +65,122 @@ export default function MemberAddPage() {
     const [isImageCropperOpen, setIsImageCropperOpen] = useState(false);
     const [file, setFile] = useState<File | null>(null);
     const [croppedFile, setCroppedFile] = useState<File | null>(null);
-    const [fileUploadLoading, setFileUploadLoading] = useState<boolean>(false);
+
+    // fetch the event
+    useEffect(() => {
+        (async () => {
+            if (!memberId || tab != "edit") return;
+            try {
+                await axios.get(`/api/team/member/get?id=${memberId}`)
+                    .then((res) => {
+                        const data = res.data.data;
+                        if (data) {
+                            setFormData({
+                                ...data,
+                                linkedin: data.socialMedia?.linkedin || "",
+                                instagram: data.socialMedia?.instagram || "",
+                            });
+                            setPreviewUrl(data?.avatar);
+                        }
+                    });
+            } catch (error) {
+                toast.error("Faild to fetch member");
+            }
+        })();
+    }, [tab, memberId]);
+
+    // handle preview image
+    useEffect(() => {
+        if (croppedFile) {
+            setPreviewUrl(URL.createObjectURL(croppedFile))
+        }
+    }, [croppedFile]);
+
+
+    // create new event
+    const handleCreateMember = async () => {
+        if (!teamId) return;
+        try {
+            const data = {
+                teamId,
+                ...formData,
+                socialMedia: {
+                    linkedin: formData.linkedin,
+                    instagram: formData.instagram
+                },
+                avatar: croppedFile || formData.avatar
+            }
+            const payLoads = objectToFormData(data)
+            await axios.post("/api/team/member/create", payLoads, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+                .then(() => {
+                    toast.success("Member created successfully");
+                    router.push(`/admin/team/${teamId}`);
+                })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data?.message)
+            }
+        }
+    }
+
+    // create new event
+    const handleEditMember = async () => {
+        try {
+            const data = {
+                memberId,
+                ...formData,
+                avatar: croppedFile || formData.avatar
+            }
+            const payLoads = objectToFormData(data)
+            await axios.patch("/api/team/member/update", payLoads, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+                .then(() => {
+                    toast.success("Member updated successfully");
+                })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data?.message)
+            }
+        }
+    }
+
+    // handle button click
+    const [isLoading, setIsLoading] = useState(false)
+    const handleButtonClick = async () => {
+        setIsLoading(true);
+
+        if (tab === "create")
+            await handleCreateMember();
+        else if (tab === "edit" && memberId)
+            await handleEditMember();
+
+        setIsLoading(false);
+    }
+
+    // delete event
+    const handleDeleteMember = async () => {
+        try {
+            if (!memberId) return;
+            setIsLoading(true);
+            await axios.delete(`/api/team/member/remove?id=${memberId}`)
+                .then(() => {
+                    toast.success("Member removed successfully");
+                    router.push(`/admin/team/${teamId}`);
+                })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data?.message)
+            }
+            setIsLoading(false);
+        }
+    }
 
     return (
         <div>
@@ -66,7 +191,7 @@ export default function MemberAddPage() {
                 <h5 className='mb-6'>Member details</h5>
                 <div className='space-y-2'>
                     <div>
-                        <div className='mb-2 text-sm'><label htmlFor="member-name">Name</label></div>
+                        <div className='mb-2 text-sm'><label htmlFor="member-name">Name *</label></div>
                         <Input
                             placeholder='Member name'
                             id='member-name'
@@ -84,7 +209,7 @@ export default function MemberAddPage() {
                         />
                     </div>
                     <div>
-                        <div className='mb-2 text-sm'><label htmlFor="member-email">Email</label></div>
+                        <div className='mb-2 text-sm'><label htmlFor="member-email">Email *</label></div>
                         <Input
                             type='email'
                             placeholder='Member email'
@@ -95,24 +220,26 @@ export default function MemberAddPage() {
                     </div>
                     <div className='grid grid-cols-2 gap-2'>
                         <div>
-                            <div className='mb-2 text-sm'>Study year</div>
-                            <Selection
+                            <div className='mb-2 text-sm'>Study year *</div>
+                            <Select
+                                placeholder='Select study year'
                                 options={yearOptions}
-                                defaultValue={formData.studyYear}
+                                value={formData.studyYear}
                                 onChange={value => handleChange(value, 'studyYear')}
                             />
                         </div>
                         <div>
-                            <div className='mb-2 text-sm'>Depertment</div>
-                            <Selection
+                            <div className='mb-2 text-sm'>Depertment *</div>
+                            <Select
+                                placeholder='Select depertment'
                                 options={depertmentOptions}
-                                defaultValue={formData.depertment}
+                                value={formData.depertment}
                                 onChange={value => handleChange(value, 'depertment')}
                             />
                         </div>
                     </div>
                     <div>
-                        <div className='mb-2 text-sm'><label htmlFor="member-role">Role</label></div>
+                        <div className='mb-2 text-sm'><label htmlFor="member-role">Role *</label></div>
                         <Input
                             placeholder='Member Role'
                             id='member-role'
@@ -141,8 +268,8 @@ export default function MemberAddPage() {
                         </div>
                     </div>
                     <div className='flex items-center gap-3'>
-                        <div>
-                            <Avatar className='w-20 h-20' />
+                        <div className='w-fit h-fit p-1 border-1 border-blue-500 rounded-full'>
+                            <Avatar className='w-20 h-20' src={previewUrl} />
                         </div>
                         <label htmlFor='member-profile' className='cursor-pointer bg-gray-200 p-2 rounded-xl'>
                             <Camera />
@@ -166,11 +293,14 @@ export default function MemberAddPage() {
                 </div>
             </div>
             <div className='flex gap-3 justify-end'>
-                {tab !== 'create' && <Button className='bg-red-400'>Remove member</Button>}
-                {tab === 'create'
-                    ? <Button variant='success'>Add member</Button>
-                    : <Button variant='success'>Save changes</Button>
-                }
+                {tab !== 'create' && <Button className='bg-red-400' disabled={isLoading} onClick={handleDeleteMember}>Remove member</Button>}
+                <Button
+                    variant='success'
+                    onClick={handleButtonClick}
+                    disabled={isLoading}
+                >
+                    {tab === "create" ? "Add Member" : "Save Details"}
+                </Button>
             </div>
             <ImageCropper
                 openState={isImageCropperOpen}

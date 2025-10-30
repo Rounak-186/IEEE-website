@@ -100,13 +100,13 @@ export const Select = ({
           onKeyDown={onKeyDown}
         >
           <span className="truncate">{selected === "" ? "" : normalized.find((o) => o.value === selected)?.label ?? selected}</span>
-          <div className="absolute top-1/2 right-4 -translate-y-1/2">
-            <ChevronDown size={16} className="text-[var(--primary)]" />
-          </div>
+        </div>
+        <div className="absolute top-1/2 right-4 -translate-y-1/2">
+          <ChevronDown size={16} className="text-[var(--primary)]" />
         </div>
       </div>
       {/* dropdown */}
-      {open && !disabled && (
+      {(open && !disabled) && (
         <ul
           role="listbox"
           aria-labelledby={uid}

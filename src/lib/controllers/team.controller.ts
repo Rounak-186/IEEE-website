@@ -5,6 +5,7 @@ import { ApiError } from "../utils/error-handler";
 import { Team, TeamMember } from "../models/team.model";
 import { ApiResponse } from "../utils/response-handler";
 import { deleteFromCloudinary, uploadToCloudinary } from "../utils/coludinary-upload";
+import { formDataToJson } from "../utils/formdata-converter";
 
 // create new team
 export const createTeam = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
@@ -15,7 +16,7 @@ export const createTeam = asyncHandler(async (req: NextRequest, context: Middlew
     const team = await Team.create({
         title: teamName,
         createdBy: userId,
-        teamType: teamType || "college"
+        teamType: teamType || "student"
     });
 
     return NextResponse.json(new ApiResponse(200, { teamId: team?._id }, "Team created successfully"));
@@ -62,7 +63,8 @@ export const deleteTeam = asyncHandler(async (req: NextRequest, context: Middlew
 // add member to team
 export const addTeamMember = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
-    const { teamId, name, about, email, studyYear, depertment, role, socialMedia } = await req.json();
+    const formData = await req.formData();
+    const { teamId, name, about, email, studyYear, depertment, role, socialMedia } = formDataToJson(formData);
     if ([teamId, name, email, studyYear, depertment, role, socialMedia].some(e => e === "")) throw new ApiError(400, "Stared fields are required");
 
     // upload avatar
@@ -105,7 +107,8 @@ export const getTeamMember = asyncHandler(async (req: NextRequest, context: Midd
 // update member
 export const updateTeamMember = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
-    const { memberId, name, about, email, studyYear, depertment, role, socialMedia } = await req.json();
+    const formData = await req.formData();
+    const { memberId, name, about, email, studyYear, depertment, role, socialMedia } = formDataToJson(formData);
     if ([memberId, name, email, studyYear, depertment, role, socialMedia].some(e => e === "")) throw new ApiError(400, "Stared fields are required");
 
     // upload avatar
@@ -152,4 +155,22 @@ export const deleteTeamMember = asyncHandler(async (req: NextRequest, context: M
     await TeamMember.findByIdAndDelete(memberId);
 
     return NextResponse.json(new ApiResponse(200, {}, "Member removed"));
+});
+
+// get team list
+export const getTeamList = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
+    const teams = await Team.find().sort({ createdAt: -1 });
+    return NextResponse.json(new ApiResponse(200, teams, "Team list fetched"));
+});
+
+// get team member list
+export const getTeamMemberList = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
+    const { searchParams } = new URL(req.url);
+    const teamId = searchParams.get("teamId");
+
+    if (!teamId) throw new ApiError(400, "Team id is required");
+
+    const members = await TeamMember.find({ teamId }).select("_id createdAt name avatar").sort({ createdAt: -1 });
+
+    return NextResponse.json(new ApiResponse(200, members, "Team member list fetched"));
 });

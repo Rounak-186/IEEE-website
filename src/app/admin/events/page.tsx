@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 export default function EventAdminPage() {
     const router = useRouter();
     // get events
-    const [eventList, setEventList] = useState<Record<string, any>[]>([]);
+    const [eventList, setEventList] = useState<Record<string, any>[] | null>(null);
     useEffect(() => {
         (async () => {
             try {
@@ -38,8 +38,9 @@ export default function EventAdminPage() {
                 </div>
                 <div>
                     <h5 className='text-xl mb-3'>Events</h5>
-                    {eventList.length === 0 && <div>No events found!</div>}
-                    {eventList.map((event, index) => (
+                    {eventList?.length === 0 && <div>No events found!</div>}
+                    {eventList === null && <div>Loading...</div>}
+                    {eventList?.map((event, index) => (
                         <div className='space-y-2' key={index}>
                             <div className='p-2 bg-gray-200 rounded-xl flex items-center gap-3 justify-between'>
                                 <div className='flex items-center gap-3'>
