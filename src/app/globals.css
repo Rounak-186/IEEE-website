@@ -111,3 +111,9 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+@media screen and (max-width: 625px) {
+  .page-title-box{
+    padding: 0em 2em !important;
+  }
+}

@@ -1,4 +1,7 @@
+"use client";
+
 import EventCard from '@/components/ui/eventCard';
+import { SlideUpAnimation } from '@/components/ui/sectionAnimation';
 import React from 'react'
 
 export default function EventPage() {
@@ -48,11 +51,16 @@ export default function EventPage() {
     <div className=''>
       <div className='page-title-box mb-8'>
         <h1 className='text-5xl font-bold text-white mb-2'>IEEE Events</h1>
-        <p className='text-gray-300 text-lg'>Join us for cutting-edge conferences, workshops, and networking events that shape the future of technology.</p>
+        <p className='text-gray-300 text-lg text-center max-sm:text-sm'>Join us for cutting-edge conferences, workshops, and networking events that shape the future of technology.</p>
       </div>
-      <div className='max-w-6xl  mx-auto w-full flex flex-wrap gap-10 items-center justify-center p-20'>
+      <div className='max-w-6xl grid mx-auto w-full grid-cols-1 md:grid-cols-2 gap-10 p-20'>
         {mockEvents.map((event, index) => (
-          <EventCard title={event.title} date={event.date} description={event.description} coverImage={event.coverImage} key={index} />
+          <SlideUpAnimation
+            delay={(index * 1.5) / 10}
+            key={index}
+          >
+            <EventCard title={event.title} date={event.date} description={event.description} coverImage={event.coverImage} />
+          </SlideUpAnimation>
         ))}
       </div>
     </div>

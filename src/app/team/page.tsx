@@ -1,7 +1,10 @@
+"use client";
+
+import { SlideUpAnimation } from '@/components/ui/sectionAnimation';
 import TeamMemberCard from '@/components/ui/teamMemberCard';
 import React from 'react'
 
-export default function EventsPage() {
+export default function TeamPage() {
 
   // mock team data
   const mockTeamMembers = [
@@ -69,13 +72,18 @@ export default function EventsPage() {
     <div>
       <div className='page-title-box mb-8'>
         <h1 className='text-5xl font-bold text-white mb-2'>Meet Our Team</h1>
-        <p className='text-gray-300 text-lg'>Meet the passionate individuals driving IEEE's mission to advance technology and foster innovation on campus.</p>
+        <p className='text-gray-300 text-lg text-center max-sm:text-sm'>Meet the passionate individuals driving IEEE's mission to advance technology and foster innovation on campus.</p>
       </div>
-      <div>
+      <div className='mb-12'>
         <h5 className='text-xl font-semibold text-center mb-6'>Faculty Team</h5>
         <div className='grid grid-cols-4 gap-10 mx-auto px-20'>
           {mockTeamMembers.map((member, index) => (
-            <TeamMemberCard name={member.name} role={member.role} coverImage={member.coverImage} key={index} />
+            <SlideUpAnimation
+              delay={(index * 1.5) / 10}
+              key={index}
+            >
+              <TeamMemberCard name={member.name} role={member.role} coverImage={member.coverImage} key={index} />
+            </SlideUpAnimation>
           ))}
         </div>
       </div>

@@ -62,19 +62,19 @@ export default function AboutPage() {
       heading: "1800",
       suffix: "+",
       title: "Active Standards",
-      desc: "Setting global standards for technology and innovation across multiple industries."
+      desc: ""
     },
     {
       heading: "5",
       suffix: "M+",
       title: "Digital Library Documents",
-      desc: "Providing access to cutting-edge research and technical publications."
+      desc: ""
     },
     {
       heading: "200",
       suffix: "+",
       title: "Journals & Magazines",
-      desc: "Publishing the latest research and developments in technology and engineering."
+      desc: ""
     },
 
   ];
@@ -92,7 +92,7 @@ export default function AboutPage() {
           <h1 className='text-5xl text-center font-bold text-white mb-4'>
             About IEEE
           </h1>
-          <h4 className='text-center text-lg  text-gray-300 '>
+          <h4 className='text-center text-lg  text-gray-300 max-sm:text-sm'>
             The Institute of Electrical and Electronics Engineers (IEEE) is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.
           </h4>
         </FadeInAnimation>
@@ -112,27 +112,27 @@ export default function AboutPage() {
             </div>
 
           </SlideUpAnimation>
-          <SlideLeftAnimation>
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1627704671340-0969d7dbac25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
-                alt="Electrical Engineering Laboratory"
-                className="rounded-lg shadow-xl w-full h-96 object-cover"
-              />
-            </div>
-          </SlideLeftAnimation>
+
+          <div>
+            <img
+              src="https://images.unsplash.com/photo-1627704671340-0969d7dbac25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+              alt="Electrical Engineering Laboratory"
+              className="rounded-lg shadow-xl w-full h-96 object-cover"
+            />
+          </div>
+
         </section>
 
       </div>
 
       {/* Core Values */}
-      <div className='flex items-center justify-center flex-col gap-3 p-20'>
-        <h1 className='text-4xl'>Our Core Values</h1>
-        <p className='text-2xl font-light text-gray-600 mb-10'>
+      <div className='flex items-center justify-center flex-col gap-3 p-20 max-sm:p-4'>
+        <h1 className='text-4xl text-center'>Our Core Values</h1>
+        <p className='text-2xl font-light text-gray-600 mb-10 max-sm:text-lg text-center'>
           IEEE's values guide our actions and define our character as an organization.
         </p>
         {/* Value Cards */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mx-auto max-w-6xl items-stretch'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 mx-auto max-w-6xl max-sm:w-full max-sm:mx-4 items-stretch'>
           {valueCards.map((card, index) => (
             <motion.div
               initial={{ opacity: 0, y: 100 }}
@@ -141,7 +141,7 @@ export default function AboutPage() {
               transition={{ duration: 1, ease: "easeOut", delay: card.delay }}
               className='h-full'
             >
-              <div key={index} className='h-full flex flex-col items-center justify-start gap-3 bg-white py-8 px-10 border-1 border-gray-300 rounded-lg hover:shadow-md hover:-translate-y-2 transition-all duration-300'>
+              <div key={index} className='h-full w-full flex flex-col items-center justify-start gap-3 bg-white py-6 px-10 border-1 border-gray-300 rounded-lg hover:shadow-md hover:-translate-y-2 transition-all duration-300'>
                 <div className='flex flex-col items-center justify-center gap-4'>
                   <span className='bg-[var(--card)] rounded-full p-2 text-[var(--primary)]'>
                     {card.icon}
@@ -178,7 +178,7 @@ export default function AboutPage() {
         </div>
       </div>
       {/* Global Impact */}
-      <div className='flex flex-col items-center justify-center p-25 bg-[var(--primary)] gap-2'>
+      <div className='flex flex-col items-center justify-center p-2 py-15 bg-[var(--primary)] gap-2'>
         <h1 className='text-4xl font-bold text-white'>
           Our Global Impact
         </h1>
