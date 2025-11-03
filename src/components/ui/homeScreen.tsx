@@ -720,21 +720,21 @@ export default function IEEEInteractiveCanvas() {
                                     <div className='space-y-4'>
                                         <div className="inline-block">
                                             <div className="relative">
-                                                <h1 className="text-9xl font-bold text-slate-800 tracking-tighter">
+                                                <h1 className="text-8xl font-bold text-slate-800 tracking-tighter">
                                                     IEEE
                                                 </h1>
-                                                <div className="absolute inset-0 text-9xl font-bold text-blue-500 tracking-tighter" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }}>
+                                                <div className="absolute inset-0 text-8xl font-bold text-blue-500 tracking-tighter" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }}>
                                                     IEEE
                                                 </div>
                                             </div>
                                             <div className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent mt-2"></div>
                                         </div>
 
-                                        <p className="text-2xl text-slate-600 font-medium tracking-wide max-w-2xl">
+                                        <p className="text-xl text-slate-600 font-medium tracking-wide max-w-2xl">
                                             Institute of Electrical and Electronics Engineers
                                         </p>
 
-                                        <p className={clsx("text-3xl text-slate-500", bungeeFont.className)}>
+                                        <p className={clsx("text-2xl text-slate-500", bungeeFont.className)}>
                                             <span className='text-blue-500 text-4xl'>JGEC</span> Student Branch
                                         </p>
                                     </div>

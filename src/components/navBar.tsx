@@ -164,7 +164,7 @@ const NavDropDown = ({ options, openState, onClose, currentPage }: { options: Re
     };
     return (
         <div className={clsx('transition-all duration-200 absolute z-50 w-full left-0 top-[60px] overflow-hidden', isOpen ? 'max-h-100' : 'max-h-0')} ref={listRef}>
-            <div className='bg-[var(--background)] p-2 shadow-2xl space-y-2 '>
+            <div className='bg-[var(--background)] p-2 shadow-2xl'>
                 {options?.map((opt) => (
                     <div key={opt.key}>
                         <Button variant='nav' key={opt.key} className={clsx('p-2 text-gray-600 w-full', currentPage === opt.key && "!text-foreground")} onClick={() => handleLinkClick(`/${opt.key}`)}>

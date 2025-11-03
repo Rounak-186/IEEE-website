@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function AccessPage() {
     const router = useRouter();
-    const { user } = useAuth();
+    const { user, logout, isLogging } = useAuth();
     const isAdminRole = user?.role === "admin";
 
     // get user list
@@ -25,8 +25,13 @@ export default function AccessPage() {
             } catch (error) {
 
             }
-        })()
-    }, [user])
+        })();
+    }, [user]);
+
+    const handleLogout = async () => {
+        await logout();
+        router.push('/admin/auth/login');
+    };
 
 
     return (
@@ -44,12 +49,17 @@ export default function AccessPage() {
             </div>
             {/* Other Authorised member Details  */}
             <div>
-                {isAdminRole &&
-                    <Button className='mb-5' onClick={() => router.push("/admin/access-control/add-user")}>
-                        <Plus size={15} />
-                        Add new user
+                <div className='flex items-center gap-2 mb-5'>
+                    {isAdminRole &&
+                        <Button onClick={() => router.push("/admin/access-control/add-user")}>
+                            <Plus size={15} />
+                            Add new user
+                        </Button>
+                    }
+                    <Button className='bg-red-500' onClick={handleLogout} disabled={isLogging}>
+                        Logout
                     </Button>
-                }
+                </div>
                 <h3 className='text-xl mb-4'>Other users</h3>
                 <div className='space-y-4'>
                     {userList?.map((member, index) => (

@@ -299,7 +299,7 @@ export default function MemberAddPage() {
                     onClick={handleButtonClick}
                     disabled={isLoading}
                 >
-                    {tab === "create" ? "Add Member" : "Save Details"}
+                    {tab === "create" ? isLoading ? "Creating..." : "Add Member" : isLoading ? "Saving..." : "Save Changes"}
                 </Button>
             </div>
             <ImageCropper

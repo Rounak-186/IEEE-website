@@ -179,6 +179,14 @@ export const updateAvatar = asyncHandler(async (req: NextRequest, context: Middl
     return NextResponse.json(new ApiResponse(200, user, "Avatar updated"));
 })
 
+export const updateRole = asyncHandler(async (req: NextRequest) => {
+    const { userId, role } = await req.json();
+    if (!userId || !role) throw new ApiError(400, "All fields are required");
+    const user = await User.findByIdAndUpdate(userId, { role }, { new: true });
+    if (!user) throw new ApiError(402, "User not found");
+    return NextResponse.json(new ApiResponse(200, {}, "User role updated"));
+});
+
 // reset password
 export const genearteResetPasswordToken = asyncHandler(async (req: NextRequest) => {
     const { email } = await req.json();

@@ -39,4 +39,4 @@ if (process.env.NODE_ENV === "development" && models.Event) {
     delete models.Event;
 }
 
-export const Event = models.Team || model("Event", eventSchema);
+export const Event = models.Event || model("Event", eventSchema);

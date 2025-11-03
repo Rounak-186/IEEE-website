@@ -28,7 +28,8 @@ export default function EventAddPage() {
         time: "",
         eventType: "",
         location: "",
-        thumbnail: ""
+        thumbnail: "",
+        navLink: ""
     });
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -201,6 +202,16 @@ export default function EventAddPage() {
                             disabled={isLoading}
                         />
                     </div>
+                    <div>
+                        <div className='mb-2 text-sm'><label htmlFor="reg-link">Registration link</label></div>
+                        <Input
+                            placeholder='Enter registration link'
+                            id='reg-link'
+                            value={formData.navLink}
+                            onChange={e => handleChange(e, 'navLink')}
+                            disabled={isLoading}
+                        />
+                    </div>
                     <div className='flex items-center gap-3'>
                         <label htmlFor="event-image" className='cursor-pointer'>
                             <div className='mb-2 text-sm'>Add Event image</div>
@@ -230,7 +241,7 @@ export default function EventAddPage() {
                     onClick={handleButtonClick}
                     disabled={isLoading}
                 >
-                    {tab === "create" ? "Add Event" : "Save Event"}
+                    {tab === "create" ? isLoading ? "Creating..." : "Create Event" : isLoading ? "Saving..." : "Save Event"}
                 </Button>
             </div>
         </div>
