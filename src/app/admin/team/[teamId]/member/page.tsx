@@ -21,12 +21,12 @@ export default function MemberAddPage() {
         '4th year',
         'alumni',
     ];
-    const depertmentOptions = [
+    const departmentOptions = [
         'IT Department',
         'CSE Department',
         'ECE Department',
-        'ELECTRICAL Department',
-        'MECHANICAL Department',
+        'EE Department',
+        'ME Department',
         'CIVIL Department',
     ];
 
@@ -45,7 +45,7 @@ export default function MemberAddPage() {
         about: "",
         email: "",
         studyYear: "",
-        depertment: "",
+        department: "",
         role: "",
         linkedin: "",
         instagram: "",
@@ -229,12 +229,12 @@ export default function MemberAddPage() {
                             />
                         </div>
                         <div>
-                            <div className='mb-2 text-sm'>Depertment *</div>
+                            <div className='mb-2 text-sm'>department *</div>
                             <Select
-                                placeholder='Select depertment'
-                                options={depertmentOptions}
-                                value={formData.depertment}
-                                onChange={value => handleChange(value, 'depertment')}
+                                placeholder='Select department'
+                                options={departmentOptions}
+                                value={formData.department}
+                                onChange={value => handleChange(value, 'department')}
                             />
                         </div>
                     </div>

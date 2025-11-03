@@ -64,8 +64,8 @@ export const deleteTeam = asyncHandler(async (req: NextRequest, context: Middlew
 export const addTeamMember = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
     const formData = await req.formData();
-    const { teamId, name, about, email, studyYear, depertment, role, socialMedia } = formDataToJson(formData);
-    if ([teamId, name, email, studyYear, depertment, role, socialMedia].some(e => e === "")) throw new ApiError(400, "Stared fields are required");
+    const { teamId, name, about, email, studyYear, department, role, socialMedia } = formDataToJson(formData);
+    if ([teamId, name, email, studyYear, department, role, socialMedia].some(e => e === "")) throw new ApiError(400, "Stared fields are required");
 
     // upload avatar
     // check avatar is or not
@@ -84,7 +84,7 @@ export const addTeamMember = asyncHandler(async (req: NextRequest, context: Midd
         email,
         avatar: avatarPath || "",
         studyYear,
-        depertment,
+        department,
         role,
         socialMedia
     });
@@ -108,8 +108,8 @@ export const getTeamMember = asyncHandler(async (req: NextRequest, context: Midd
 export const updateTeamMember = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
     const formData = await req.formData();
-    const { memberId, name, about, email, studyYear, depertment, role, socialMedia } = formDataToJson(formData);
-    if ([memberId, name, email, studyYear, depertment, role, socialMedia].some(e => e === "")) throw new ApiError(400, "Stared fields are required");
+    const { memberId, name, about, email, studyYear, department, role, socialMedia } = formDataToJson(formData);
+    if ([memberId, name, email, studyYear, department, role, socialMedia].some(e => e === "")) throw new ApiError(400, "Stared fields are required");
 
     // upload avatar
     // check avatar is or not
@@ -126,7 +126,7 @@ export const updateTeamMember = asyncHandler(async (req: NextRequest, context: M
         about,
         email,
         studyYear,
-        depertment,
+        department,
         role,
         socialMedia
     }, { new: true });
@@ -173,4 +173,58 @@ export const getTeamMemberList = asyncHandler(async (req: NextRequest, context: 
     const members = await TeamMember.find({ teamId }).select("_id createdAt name avatar").sort({ createdAt: -1 });
 
     return NextResponse.json(new ApiResponse(200, members, "Team member list fetched"));
+});
+
+export const getTeamFeedList = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
+    const teamList = await Team.aggregate([
+        {
+            $match: {
+                teamType: {
+                    $in: ['student', 'faculty']
+                }
+            }
+        },
+        {
+            $lookup: {
+                from: "teammembers",
+                localField: "_id",
+                foreignField: "teamId",
+                as: "members"
+            }
+        },
+        {
+            $project: {
+                title: 1,
+                members: 1
+            }
+        }
+    ]);
+
+    return NextResponse.json(new ApiResponse(200, teamList, "Team list fetched"));
+});
+
+export const getAlumniFeedList = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
+    const teamList = await Team.aggregate([
+        {
+            $match: {
+                teamType: 'alumni'
+            }
+        },
+        {
+            $lookup: {
+                from: "teammembers",
+                localField: "_id",
+                foreignField: "teamId",
+                as: "members"
+            }
+        },
+        {
+            $project: {
+                title: 1,
+                members: 1
+            }
+        }
+    ]);
+
+    return NextResponse.json(new ApiResponse(200, teamList, "Team list fetched"));
 });

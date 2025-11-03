@@ -2,12 +2,13 @@
 
 import { SlideUpAnimation } from '@/components/ui/sectionAnimation';
 import TeamMemberCard from '@/components/ui/teamMemberCard';
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 export default function AlumniPage() {
 
   // mock team data
-   const mockAlumniMembers = [
+  const mockAlumniMembers = [
     {
       name: "Rounak Mohata",
       role: "Frontend Developer",
@@ -66,7 +67,21 @@ export default function AlumniPage() {
     },
   ];
 
+  const [teamData, setTeamData] = useState<Record<string, any>[] | null>(null);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        await axios.get("/api/team/get-alumni-feed")
+          .then(res => {
+            const data = res.data.data;
+            if (data) setTeamData(data);
+          });
+      } catch (error) {
+
+      }
+    })();
+  }, []);
 
 
   return (
@@ -75,18 +90,23 @@ export default function AlumniPage() {
         <h1 className='text-5xl font-bold text-white mb-2 text-center'>IEEE JGEC Alumni</h1>
         <p className='text-gray-300 text-lg max-sm:text-sm text-center'>Celebrating the achievements of our graduates who are shaping the future of technology across industries and academia.</p>
       </div>
-      <div className='mb-12'>
-        <h5 className='text-xl font-semibold text-center mb-10'>Alumni Team</h5>
-        <div className='grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10 p-5'>
-          {mockAlumniMembers.map((member, index) => (
-            <SlideUpAnimation
-              delay={(index * 1.5) / 10}
-              key={index}
-            >
-              <TeamMemberCard memberDetails={member} />
-            </SlideUpAnimation>
-          ))}
-        </div>
+      <div className='max-w-7xl mx-auto'>
+        {teamData?.map((team, index) => (
+          <div className='mb-12' key={index}>
+            <h5 className='text-xl font-semibold text-center mb-6'>{team?.title}</h5>
+            <div className='grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10 p-5'>
+              {team?.members?.map((member: any, index1: number) => (
+                <SlideUpAnimation
+                  delay={(index * 1.5) / 10}
+                  key={index1}
+                  className='w-full justify-self-center flex justify-center'
+                >
+                  <TeamMemberCard memberDetails={member} />
+                </SlideUpAnimation>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

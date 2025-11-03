@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { Playwrite_US_Modern } from "next/font/google"
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const playwriteUSModern = Playwrite_US_Modern({
     variable: "--font-playwrite-us-modern",
@@ -122,12 +122,10 @@ export default function NavBar({ navOpts, className, isVisible = true }: NavBarP
                             setIsMenuOpen(prev => !prev);
                         }}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-menu-icon lucide-menu">
-                            <path d="M4 5h16" className={clsx("transition-all duration-300", isMenuOpen && 'rotate-45 origin-center -translate-x-[9px]')} />
-                            <path d="M4 10h16" className={clsx("transition-all duration-300", isMenuOpen && '-rotate-45 origin-center translate-x-[9px] -translate-y-1')} />
-                            <path d="M4 15h16" className={clsx("transition-all duration-300", isMenuOpen && 'rotate-45 origin-center translate-x-[9px] translate-y-1')} />
-                            <path d="M4 20h16" className={clsx("transition-all duration-300", isMenuOpen && '-rotate-45 origin-center -translate-x-[9px]')} />
-                        </svg>
+                        {!isMenuOpen ?
+                            <Menu />
+                            : <X />
+                        }
                     </Button>
                 </div>
                 <NavDropDown options={navOpt} openState={isMenuOpen} onClose={() => setIsMenuOpen(false)} currentPage={currentPage} />
