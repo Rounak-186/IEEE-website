@@ -14,7 +14,7 @@ type EventCardProps = {
 
 export default function EventCard({ title, date, description, coverImage }: EventCardProps) {
     return (
-        <Card>
+        <Card className='w-[800px]'>
 
             {/* Cover Image */}
             <img

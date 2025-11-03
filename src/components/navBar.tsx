@@ -122,7 +122,12 @@ export default function NavBar({ navOpts, className, isVisible = true }: NavBarP
                             setIsMenuOpen(prev => !prev);
                         }}
                     >
-                        <Menu />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-menu-icon lucide-menu">
+                            <path d="M4 5h16" className={clsx("transition-all duration-300", isMenuOpen && 'rotate-45 origin-center -translate-x-[9px]')} />
+                            <path d="M4 10h16" className={clsx("transition-all duration-300", isMenuOpen && '-rotate-45 origin-center translate-x-[9px] -translate-y-1')} />
+                            <path d="M4 15h16" className={clsx("transition-all duration-300", isMenuOpen && 'rotate-45 origin-center translate-x-[9px] translate-y-1')} />
+                            <path d="M4 20h16" className={clsx("transition-all duration-300", isMenuOpen && '-rotate-45 origin-center -translate-x-[9px]')} />
+                        </svg>
                     </Button>
                 </div>
                 <NavDropDown options={navOpt} openState={isMenuOpen} onClose={() => setIsMenuOpen(false)} currentPage={currentPage} />
@@ -153,7 +158,7 @@ const NavDropDown = ({ options, openState, onClose, currentPage }: { options: Re
         return () => document.removeEventListener("mousedown", handleBackClose);
     });
 
-     useEffect(() => {
+    useEffect(() => {
         document.addEventListener("scroll", onClose);
         return () => document.removeEventListener("scroll", onClose);
     });

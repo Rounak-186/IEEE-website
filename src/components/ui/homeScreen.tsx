@@ -711,12 +711,12 @@ export default function IEEEInteractiveCanvas() {
             <div className="absolute inset-0 pointer-events-none">
                 <div className="h-full w-full flex flex-col items-center " ref={sectionRef}>
                     <div className='mb-10 h-fit'>
-                        <NavBar className='w-screen !bg-transparent backdrop-blur-none !border-0 px-10 py-5 pointer-events-auto' />
+                        <NavBar className='w-screen !bg-transparent backdrop-blur-none !border-0 sm:px-10 py-5 pointer-events-auto' />
                     </div>
                     <div className='w-full h-full flex justify-start items-start'>
                         <SlideUpAnimation className="h-full">
                             <motion.div style={{ y, opacity }} className='h-full'>
-                                <div className="h-[80%] grid grid-rows[1fr_auto] space-y-6 p-10">
+                                <div className="h-[80%] grid grid-rows[1fr_auto] space-y-6 p-10 max-sm:px-3">
                                     <div className='space-y-4'>
                                         <div className="inline-block">
                                             <div className="relative">
@@ -739,13 +739,13 @@ export default function IEEEInteractiveCanvas() {
                                         </p>
                                     </div>
 
-                                    <div className="self-end flex gap-4 pt-4 pointer-events-auto">
-                                        <Button className="group relative px-10 py-5 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg">
+                                    <div className="self-end flex gap-4 pt-4 pointer-events-auto max-sm:flex-col">
+                                        <Button className="group relative px-10 py-5 max-sm:p-5 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg justify-center">
                                             <span className="relative z-10">Explore Innovations</span>
                                             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                         </Button>
 
-                                        <Button variant='outline' className="px-10 py-5 bg-white text-blue-600 font-semibold rounded-lg border-2 !border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-lg">
+                                        <Button variant='outline' className="px-10 py-5 max-sm:p-5 bg-white text-blue-600 font-semibold rounded-lg border-2 !border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-lg justify-center">
                                             Join Community
                                         </Button>
                                     </div>

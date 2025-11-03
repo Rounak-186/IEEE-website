@@ -25,20 +25,20 @@ export default function ContactPage() {
 
   return (
     <div>
-      <div className='page-title-box mb-8'>
-        <h1 className='text-5xl font-bold text-white mb-2'>Contact Us</h1>
+      <div className='page-title-box mb-8 !py-17'>
+        <h1 className='text-5xl font-bold text-white mb-2 text-center'>Contact Us</h1>
         <p className='text-gray-300 text-lg text-center max-sm:text-sm'>Get in touch with IEEE Student Branch. We're here to help with your questions, ideas, and collaboration opportunities.</p>
       </div>
       {/* form and contact info*/}
-      <div className='flex gap-8 flex-wrap p-20 mx-auto justify-center'>
+      <div className='flex justify-center gap-10 max-md:flex-col-reverse p-15 max-sm:p-2 mx-auto max-md:p-6 max-w-7xl mb-6 max-md:w-[95vw]'>
         {/* form */}
-        <SlideUpAnimation>
-          <div className="flex flex-col gap-6 max-w-2xl w-full">
-            <h3 className='text-3xl mb-2'>Send Us a Message</h3>
+        <SlideUpAnimation className='w-full max-w-2xl md:flex-2'>
+          <div className="flex flex-col md:max-w-2xl w-full">
+            <h3 className='text-3xl mb-6'>Send Us a Message</h3>
             {/* form card */}
-            <div className="w-full max-w-3xl bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+            <div className="w-full max-w-3xl bg-white rounded-2xl border border-gray-200 p-6 max-sm:p-3 shadow-sm max-sm:w-full">
               <form aria-label="Contact form">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-sm font-semibold mb-2" htmlFor="firstName">First Name</label>
                     <Input
@@ -109,20 +109,18 @@ export default function ContactPage() {
           </div>
         </SlideUpAnimation>
         {/* contact and follow */}
-        <div>
-          <div className="flex flex-col gap-6 max-w-xl w-full">
-            <h3 className='text-3xl mb-2'>Get in Touch</h3>
-          </div>
+        <div className='w-full md:flex-1'>
+          <h3 className='text-3xl mb-6'>Get in Touch</h3>
           {/* contact details */}
-          <div className="flex flex-col gap-4 w-full py-6">
+          <div className="flex flex-col gap-4 w-full justify-center">
             <SlideUpAnimation>
-              <div className='w-full max-w-md h-fit rounded-lg  border border-gray-300 member-card flex justify-center relative overflow-hidden bg-white p-4 flex-row gap-4 pr-30'>
+              <div className='w-full h-fit rounded-lg  border border-gray-300 member-card flex flex-col justify-center relative overflow-hidden bg-white p-4 pr-8 gap-4'>
                 {/* icon */}
-                <div className='text-[var(--primary)] flex justify-center p-1'>
-                  <Mail />
+                <div className='flex items-center gap-3'>
+                  <span className='text-[var(--primary)]'><Mail /></span>
+                  <h4 className='text-xl max-lg:text-lg'>General Enquiries</h4>
                 </div>
-                <div className='flex flex-col justify-center gap-2 '>
-                  <h4 className='text-xl'>General Enquiries</h4>
+                <div className='flex flex-col gap-2 '>
                   {/* mail */}
                   <div className="flex gap-2 items-center">
                     <span className='text-gray-700'>
@@ -135,14 +133,14 @@ export default function ContactPage() {
                     <span className='text-gray-700'>
                       <Phone size={18} />
                     </span>
-                    <span className="text-gray-700">9434xxxxxxx</span>
+                    <a href='tel:'><span className="text-gray-700">9434xxxxxxx</span></a>
                   </div>
                 </div>
               </div>
             </SlideUpAnimation>
-            <SlideUpAnimation delay={0.3}>
-              <div className='w-full max-w-md h-fit rounded-lg  border border-gray-300 member-card flex justify-center relative overflow-hidden bg-white p-4 flex-col gap-4 pr-30'>
-                <h4 className='text-xl'>Follow Us</h4>
+            <SlideUpAnimation delay={0.3} className=''>
+              <div className='w-full h-full rounded-lg  border border-gray-300 member-card flex justify-center  relative overflow-hidden bg-white p-4 flex-col pr-30 gap-4'>
+                <h4 className='text-xl max-lg:text-lg'>Follow Us</h4>
                 {/* Social media icons */}
                 <div className='flex items-center justify-start gap-4'>
                   <a href={"#"} target="_blank" rel="noopener noreferrer" className='flex items-center justify-center w-8 h-8 rounded-lg text-gray-600 hover:text-blue-700'>

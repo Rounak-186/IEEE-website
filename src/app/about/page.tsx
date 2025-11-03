@@ -140,8 +140,9 @@ export default function AboutPage() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut", delay: card.delay }}
               className='h-full'
+              key={index}
             >
-              <div key={index} className='h-full w-full flex flex-col items-center justify-start gap-3 bg-white py-6 px-10 border-1 border-gray-300 rounded-lg hover:shadow-md hover:-translate-y-2 transition-all duration-300'>
+              <div className='h-full w-full flex flex-col items-center justify-start gap-3 bg-white py-6 px-10 border-1 border-gray-300 rounded-lg hover:shadow-md hover:-translate-y-2 transition-all duration-300'>
                 <div className='flex flex-col items-center justify-center gap-4'>
                   <span className='bg-[var(--card)] rounded-full p-2 text-[var(--primary)]'>
                     {card.icon}
@@ -186,9 +187,9 @@ export default function AboutPage() {
           IEEE's influence extends across industries, academia, and research institutions worldwide.
         </h4>
         {/* Imapct Cards */}
-        <div ref={ref} className='grid grid-cols-3 gap-7 mx-auto max-w-6xl items-stretch'>
+        <div ref={ref} className='grid grid-cols-3 gap-7 mx-auto max-w-6xl items-stretch max-sm:grid-cols-1 max-sm:gap-1'>
           {imapctData.map((impact, index) => (
-            <div key={index} className='flex flex-col items-center justify-start gap-3 py-8 px-10 text-white'>
+            <div key={index} className='flex flex-col items-center justify-start gap-3 py-2 px-10 text-white'>
               <div className='flex flex-col items-center justify-center gap-4'>
                 <span className='flex items-center justify-center text-3xl'>
                   {inView ? (
