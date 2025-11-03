@@ -165,8 +165,8 @@ export default function AboutPage() {
           {/* History tabs */}
           <div className='flex flex-col justify-center items-center gap-5 w-full p-8'>
             {historyData.map((history, index) => (
-              <SlideUpAnimation delay={(index * 3) / 10}>
-                <div key={index} className='grid grid-cols-1 md:grid-cols-3 items-center gap-8'>
+              <SlideUpAnimation delay={(index * 3) / 10} key={index}>
+                <div className='grid grid-cols-1 md:grid-cols-3 items-center gap-8'>
                   <div className='flex flex-col justify-center gap-3 md:col-span-1'>
                     <div className='text-[var(--primary)] text-2xl'>{history.year}</div>
                     <div className='text-xl'> {history.heading} </div>
