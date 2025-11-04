@@ -81,6 +81,7 @@ export const Select = ({
         <label
           htmlFor={uid}
           className={clsx('absolute ml-3 transition-all duration-200 px-1 text-foreground cursor-text z-1 origin-left', (isFocused || selected != "") && '!text-[var(--primary)] -translate-y-3 scale-80', placeholderClass)}
+          onClick={() => setIsFocused(true)}
         >
           {placeholder}
         </label>
