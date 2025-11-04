@@ -1,4 +1,3 @@
-import { desc } from "framer-motion/client";
 
 export const metadata = {
     title: "Team | IEEE JGEC Student Branch",
