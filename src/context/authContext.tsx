@@ -6,7 +6,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
 type AuthContextType = {
-    isAuthenticated: boolean;
+    isAuthenticated: boolean | null;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
     user: any;
@@ -18,7 +18,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
     const [isLogging, setIsLogging] = useState(false);
     const [user, setUser] = useState<Record<string, any> | null>(null);
 
