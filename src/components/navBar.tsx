@@ -163,7 +163,7 @@ const NavDropDown = ({ options, openState, onClose, currentPage }: { options: Re
 
     const handleLinkClick = (path: string) => {
         router.push(path);
-        setIsOpen(false);
+        onClose();
     };
     return (
         <div className={clsx('transition-all duration-200 absolute z-50 w-full left-0 top-[60px] overflow-hidden', isOpen ? 'max-h-100' : 'max-h-0')} ref={listRef}>
