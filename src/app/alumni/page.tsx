@@ -2,72 +2,21 @@
 
 import { SlideUpAnimation } from '@/components/ui/sectionAnimation';
 import TeamMemberCard from '@/components/ui/teamMemberCard';
+import { useStore } from '@/context/storeContext';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 export default function AlumniPage() {
 
-  // mock team data
-  const mockAlumniMembers = [
-    {
-      name: "Rounak Mohata",
-      role: "Frontend Developer",
-      studyYear: "2025",
-      department: "Web Development",
-      avatar: "https://picsum.photos/id/1011/400/300",
-    },
-    {
-      name: "Ananya Singh",
-      role: "UI/UX Designer",
-      studyYear: "2024",
-      department: "Design",
-      avatar: "https://picsum.photos/id/1025/400/300",
-    },
-    {
-      name: "Aditya Verma",
-      role: "Backend Developer",
-      studyYear: "2023",
-      department: "Software Engineering",
-      avatar: "https://picsum.photos/id/1033/400/300",
-    },
-    {
-      name: "Neha Kapoor",
-      role: "Project Manager",
-      studyYear: "2025",
-      department: "Management",
-      avatar: "https://picsum.photos/id/1041/400/300",
-    },
-    {
-      name: "Karan Mehta",
-      role: "DevOps Engineer",
-      studyYear: "2024",
-      department: "Infrastructure",
-      avatar: "https://picsum.photos/id/1050/400/300",
-    },
-    {
-      name: "Ishita Rao",
-      role: "Data Scientist",
-      studyYear: "2025",
-      department: "AI & Data",
-      avatar: "https://picsum.photos/id/1062/400/300",
-    },
-    {
-      name: "Vikram Singh",
-      role: "Mobile Developer",
-      studyYear: "2023",
-      department: "Mobile Apps",
-      avatar: "https://picsum.photos/id/1074/400/300",
-    },
-    {
-      name: "Priya Sharma",
-      role: "Marketing Lead",
-      studyYear: "2025",
-      department: "Marketing",
-      avatar: "https://picsum.photos/id/1080/400/300",
-    },
-  ];
-
   const [teamData, setTeamData] = useState<Record<string, any>[] | null>(null);
+
+  const { teamStore, setTeamStore } = useStore();
+  // load data from store first
+  useEffect(() => {
+    if (teamStore) {
+      setTeamData(teamStore);
+    }
+  }, [teamStore]);
 
   useEffect(() => {
     (async () => {
@@ -75,7 +24,7 @@ export default function AlumniPage() {
         await axios.get("/api/team/get-alumni-feed")
           .then(res => {
             const data = res.data.data;
-            if (data) setTeamData(data);
+            if (data) setTeamStore(data);
           });
       } catch (error) {
 
