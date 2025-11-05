@@ -30,10 +30,10 @@ export const getAllMessages = asyncHandler(async (req: NextRequest) => {
         matchStage.isViewed = true;
     } else if (filter === "not-viewed") {
         matchStage.isViewed = false;
-    }else if (filter === "replied") {
+    } else if (filter === "replied") {
         matchStage.isReplied = true;
     }
-    
+
     const messages = await Message.aggregate([
         { $match: matchStage },
         {
@@ -46,3 +46,14 @@ export const getAllMessages = asyncHandler(async (req: NextRequest) => {
 
     return NextResponse.json(new ApiResponse(200, messages, "Messages fetched"));
 });
+
+// mark message
+export const markMessage = asyncHandler(async (req: NextRequest) => {
+    const { messageId, isViewed, isReplied } = await req.json();
+    await Message.findByIdAndUpdate(messageId, {
+        isViewed,
+        isReplied
+    }, { new: true });
+
+    return NextResponse.json(new ApiResponse(200, {}, "Messages updated"));
+})

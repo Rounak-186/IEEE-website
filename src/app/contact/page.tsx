@@ -6,8 +6,10 @@ import { Input } from '@/components/ui/input';
 import { SlideUpAnimation } from '@/components/ui/sectionAnimation';
 import { Select } from '@/components/ui/select';
 import { TextArea } from '@/components/ui/textArea';
+import axios from 'axios';
 import { Instagram, Linkedin, Mail, MailCheck, Phone } from 'lucide-react';
 import React, { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function ContactPage() {
 
@@ -19,8 +21,49 @@ export default function ContactPage() {
     message: "",
   });
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-    setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
+  function handleChange(field: string, value: string | any) {
+    setForm((s) => ({ ...s, [field]: value }));
+  }
+
+  // handle send message
+  const [isSending, setIsSending] = useState(false);
+  const handleSendMessage = async (e: any) => {
+    e.preventDefault();
+    if (!form.firstName || !form.email || !form.subject || !form.message) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+
+    if (!form.email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    // send message
+    try {
+      setIsSending(true);
+      await axios.post("/api/message/create", form)
+        .then(() => {
+          toast.success("Message send successfully. We will get back to you soon!", {
+            icon: <MailCheck className='text-green-400'/>
+          });
+          setForm({
+            firstName: "",
+            lastName: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+        })
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message || "Something went wrong");
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+
+    setIsSending(false);
   }
 
   return (
@@ -37,7 +80,7 @@ export default function ContactPage() {
             <h3 className='text-3xl mb-6'>Send Us a Message</h3>
             {/* form card */}
             <div className="w-full max-w-3xl bg-white rounded-2xl border border-gray-200 p-6 max-sm:p-3 shadow-sm max-sm:w-full">
-              <form aria-label="Contact form">
+              <form aria-label="Contact form" onSubmit={handleSendMessage}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-sm font-semibold mb-2" htmlFor="firstName">First Name</label>
@@ -45,8 +88,9 @@ export default function ContactPage() {
                       id="firstName"
                       value={form.firstName}
                       placeholder="Enter your first name"
-                      placeholderClass="bg-white"
                       required
+                      onChange={(e) => handleChange("firstName", e)}
+                      disabled={isSending}
                     />
                   </div>
 
@@ -56,8 +100,9 @@ export default function ContactPage() {
                       id="lastName"
                       value={form.lastName}
                       placeholder="Enter your last name"
-                      placeholderClass="bg-white"
                       required
+                      onChange={(e) => handleChange("lastName", e)}
+                      disabled={isSending}
                     />
                   </div>
                 </div>
@@ -69,8 +114,9 @@ export default function ContactPage() {
                     type="email"
                     value={form.email}
                     placeholder="Enter your email"
-                    placeholderClass="bg-white"
                     required
+                    onChange={(e) => handleChange("email", e)}
+                    disabled={isSending}
                   />
                 </div>
 
@@ -84,6 +130,8 @@ export default function ContactPage() {
                     placeholderClass='!bg-white'
                     options={["General question", "Events & workshops", "Membership", "Collaboration"]}
                     required
+                    onChange={(value) => handleChange("subject", value)}
+                    disabled={isSending}
                   />
                 </div>
 
@@ -94,15 +142,18 @@ export default function ContactPage() {
                     value={form.message}
                     placeholder="Write your message"
                     rows={8}
-                    placeholderClass="bg-white"
                     required
+                    onChange={(e) => handleChange("message", e)}
+                    disabled={isSending}
                   />
                 </div>
 
                 <Button
                   className="w-full justify-center"
+                  onClick={handleSendMessage}
+                  disabled={isSending}
                 >
-                  Send Message
+                  {isSending ? "Sending message..." : "Send Message"}
                 </Button>
               </form>
             </div>
@@ -155,6 +206,17 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={6000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        theme="light"
+      />
     </div>
   )
 }

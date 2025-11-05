@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Ubuntu, Ubuntu_Mono } from "next/font/google";
+// @ts-ignore: allow importing global CSS without type declarations
 import "./globals.css";
+// @ts-ignore: allow importing nprogress CSS without type declarations
+import 'nprogress/nprogress.css';
 import NavBar from "@/components/navBar";
 import { NavbarProvider } from "@/context/navbarContext";
 import { HeaderNav } from "@/components/HeaderNav";
 import { Footer } from "@/components/Footer";
 import { StoreProvider } from "@/context/storeContext";
+import LoadingProgress from "@/components/PageProgressBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +44,8 @@ export default function RootLayout({
       >
         <StoreProvider>
           <NavbarProvider>
+            {/* Progress bar */}
+            <LoadingProgress />
             {/* NavBar */}
             <HeaderNav />
             <main className="min-h-screen">
