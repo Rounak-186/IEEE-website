@@ -157,7 +157,7 @@ export default function Home() {
                 whileHover={{ scale: 1.1 }}
               >
                 <motion.div
-                  className="text-5xl mb-2"
+                  className="text-5xl mb-2 max-sm:text-[32px]"
                   animate={{
                     textShadow: [
                       "0 0 20px rgba(255,255,255,0.5)",

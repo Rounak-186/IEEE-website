@@ -15,7 +15,6 @@ type EventCardProps = {
 export default function EventCard({ event }: { event: Record<string, any> }) {
     return (
         <Card className='w-[800px]'>
-
             {/* Cover Image */}
             <img
                 src={event?.thumbnail}

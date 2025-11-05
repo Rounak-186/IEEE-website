@@ -4,9 +4,6 @@ import { Metadata } from 'next';
 import React from 'react'
 import { ToastContainer } from 'react-toastify';
 
-export const metadata: Metadata = {
-    title: "Admin | IEEE JGEC Student branch",
-};
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 
