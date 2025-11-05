@@ -26,9 +26,9 @@ export default function EventPage() {
         await axios.get("/api/event/get-all")
           .then(res => {
             const data = res.data.data;
-            if (data) 
-              setTimeout(()=>setEventStore(data), 1000)
-            });
+            if (data)
+              setTimeout(() => setEventStore(data), 1000)
+          });
       } catch (error) {
 
       }
@@ -46,7 +46,7 @@ export default function EventPage() {
       {eventData == null ? (
         <div className='max-w-6xl grid mx-auto w-full grid-cols-1 md:grid-cols-2 gap-10 p-2 md:p-20 '>
           {[...Array(4)].map((_, index) => (
-            <div className='animate-pulse w-[800px] max-w-md h-fit rounded-lg transition-all duration-500 border border-gray-300 p-2 flex flex-col justify-center gap-1 relative overflow-hidden'>
+            <div key={index} className='animate-pulse w-[800px] max-w-md h-fit rounded-lg transition-all duration-500 border border-gray-300 p-2 flex flex-col justify-center gap-1 relative overflow-hidden'>
               {/* Cover Image */}
               <div
                 className='rounded-lg  w-full aspect-[5/3] bg-gray-300'

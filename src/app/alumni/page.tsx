@@ -43,9 +43,9 @@ export default function AlumniPage() {
       </div>
       {teamData == null ? (
         <div className='max-w-7xl mx-auto'>
-          <div className="grid md:grid-cols-3 max-sm:w-full lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10 p-5 shadow-md ">
+          <div className="grid md:grid-cols-3 max-sm:w-full lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-10 p-5">
             {[...Array(4)].map((_, i) => (
-              <div className=' animate-pulse w-[300px] h-[400px] p-4 rounded-xl bg-gray-100 max-w-md transition-all duration-500 border border-gray-300 flex flex-col justify-center gap-1 relative overflow-hidden'>
+              <div key={i} className=' animate-pulse w-[300px] h-[400px] max-sm:w-full p-4 rounded-xl bg-gray-100 max-w-md transition-all duration-500 border border-gray-300 flex flex-col justify-center gap-1 relative overflow-hidden'>
 
                 <div className='flex flex-col items-center'>
                   {/* Cover Image */}

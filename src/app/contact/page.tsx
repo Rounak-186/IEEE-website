@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { SlideUpAnimation } from '@/components/ui/sectionAnimation';
+import { FadeInAnimation, SlideUpAnimation } from '@/components/ui/sectionAnimation';
 import { Select } from '@/components/ui/select';
 import { TextArea } from '@/components/ui/textArea';
 import axios from 'axios';
@@ -45,7 +45,7 @@ export default function ContactPage() {
       await axios.post("/api/message/create", form)
         .then(() => {
           toast.success("Message send successfully. We will get back to you soon!", {
-            icon: <MailCheck className='text-green-400'/>
+            icon: <MailCheck className='text-green-400' />
           });
           setForm({
             firstName: "",
@@ -83,7 +83,7 @@ export default function ContactPage() {
               <form aria-label="Contact form" onSubmit={handleSendMessage}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm font-semibold mb-2" htmlFor="firstName">First Name</label>
+                    <label className="block text-sm font-semibold mb-2" htmlFor="firstName">First Name<span className='text-red-400'>*</span></label>
                     <Input
                       id="firstName"
                       value={form.firstName}
@@ -108,7 +108,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm font-semibold mb-2" htmlFor="email">Email Address</label>
+                  <label className="block text-sm font-semibold mb-2" htmlFor="email">Email Address<span className='text-red-400'>*</span></label>
                   <Input
                     id="email"
                     type="email"
@@ -121,7 +121,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm font-semibold mb-2" htmlFor="subject">Subject</label>
+                  <label className="block text-sm font-semibold mb-2" htmlFor="subject">Subject<span className='text-red-400'>*</span></label>
                   <Select
                     id="subject"
                     name="subject"
@@ -136,7 +136,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-sm font-semibold mb-2" htmlFor="message">Message</label>
+                  <label className="block text-sm font-semibold mb-2" htmlFor="message">Message<span className='text-red-400'>*</span></label>
                   <TextArea
                     id="message"
                     value={form.message}
@@ -161,7 +161,9 @@ export default function ContactPage() {
         </SlideUpAnimation>
         {/* contact and follow */}
         <div className='w-full md:flex-1'>
-          <h3 className='text-3xl mb-6'>Get in Touch</h3>
+          <FadeInAnimation>
+            <h3 className='text-3xl mb-6'>Get in Touch</h3>
+          </FadeInAnimation>
           {/* contact details */}
           <div className="flex flex-col gap-4 w-full justify-center">
             <SlideUpAnimation>

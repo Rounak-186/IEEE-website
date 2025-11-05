@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from './button';
 import { Card } from './card';
 import { ChevronsRight } from 'lucide-react';
+import { formatDate } from '@/lib/utils/formatDate';
 
 type EventCardProps = {
     title: string,
@@ -25,7 +26,9 @@ export default function EventCard({ event }: { event: Record<string, any> }) {
             {/* heading and Date */}
             <div className="flex justify-between items-center w-[100%]  p-3">
                 <h3 className='text-xl text-[#4b5365]  font-bold '>{event?.title}</h3>
-                <p className='text-xs text-center text-[var(--primary)] bg-[#b2e3ffb4] backdrop-blur-sm inset-shadow-sm  rounded-xl px-3 py-1 w-fit'>{event?.date}</p>
+                {event?.date &&
+                    <p className='text-xs text-center text-[var(--primary)] bg-[#b2e3ffb4] backdrop-blur-sm inset-shadow-sm  rounded-xl px-3 py-1 w-fit whitespace-nowrap'>{formatDate(event?.date)}</p>
+                }
             </div>
             {/* description */}
             <div className='p-3'>
