@@ -112,12 +112,7 @@ body {
   background-size: cover;
 }
 
-.event-registration-box{
-  background-image: url("https://plus.unsplash.com/premium_photo-1683740128079-09405ab63ab8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGVjaG5pY2FsJTIwZXZlbnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600");
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-}
+
 
 @media screen and (max-width: 625px) {
   .page-title-box{
