@@ -179,14 +179,7 @@ export default function ContactPage() {
                     <span className='text-gray-700'>
                       <Mail size={18} />
                     </span>
-                    <a href="mailto:"><span className="text-gray-700">example@gmail.com</span></a>
-                  </div>
-                  {/* contact */}
-                  <div className="flex gap-2 items-center">
-                    <span className='text-gray-700'>
-                      <Phone size={18} />
-                    </span>
-                    <a href='tel:'><span className="text-gray-700">9434xxxxxxx</span></a>
+                    <a href="mailto:"><span className="text-gray-700">ieee_sb@jgec.ac.in</span></a>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {  useContext, useEffect, useRef } from 'react';
 import { Bungee } from "next/font/google";
 import clsx from 'clsx';
 import { motion, useScroll, useTransform } from "framer-motion"
@@ -8,11 +8,14 @@ import { SlideUpAnimation } from './sectionAnimation';
 import NavbarContext from '@/context/navbarContext';
 import NavBar from '../navBar';
 import { Button } from './button';
+import { useRouter } from 'next/navigation';
 
 const bungeeFont = Bungee({
     weight: '400',
     subsets: ['latin'],
 });
+
+
 
 export default function IEEEInteractiveCanvas() {
     const { setIsShowHeaderNav } = useContext(NavbarContext)!;
@@ -33,6 +36,8 @@ export default function IEEEInteractiveCanvas() {
     const canvasRef = useRef(null);
     const animationRef = useRef(null);
     const mouseRef = useRef({ x: 0, y: 0, isMoving: false });
+
+    const router = useRouter();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -740,12 +745,20 @@ export default function IEEEInteractiveCanvas() {
                                     </div>
 
                                     <div className="self-end flex gap-4 pt-4 pointer-events-auto max-sm:flex-col">
-                                        <Button className="group relative px-10 py-5 max-sm:p-5 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg justify-center">
+                                        <Button 
+                                        className="group relative px-10 py-5 max-sm:p-5 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg justify-center"
+                                        onClick={()=>router.push("/events")}
+                                        >
                                             <span className="relative z-10">Explore Innovations</span>
                                             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                         </Button>
 
-                                        <Button variant='outline' className="px-10 py-5 max-sm:p-5 bg-white text-blue-600 font-semibold rounded-lg border-2 !border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-lg justify-center">
+                                        <Button 
+                                        variant='outline' 
+                                        className="px-10 py-5 max-sm:p-5 bg-white text-blue-600 font-semibold rounded-lg border-2 !border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-lg justify-center"
+                                        onClick={()=>router.push("/contact")}
+                                        >
+                                            
                                             Join Community
                                         </Button>
                                     </div>

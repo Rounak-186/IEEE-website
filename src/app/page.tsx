@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import CountUp from 'react-countup';
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 
 const features = [
@@ -47,6 +48,8 @@ export default function Home() {
     triggerOnce: true, // animation triggers only once
     threshold: 0.2,    // 20% visible
   });
+
+  const router = useRouter();
 
   return (
     <div className="relative w-full min-h-[calc(100dvh-60px)] overflow-hidden">
@@ -261,7 +264,7 @@ export default function Home() {
             >
               <Button
                 className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-2xl px-8 py-6 text-lg"
-              // onClick={() => onNavigate('contact')}
+                onClick={() => router.push('contact')}
               >
                 <Rocket className="mr-2 h-5 w-5" />
                 Get Started Today
