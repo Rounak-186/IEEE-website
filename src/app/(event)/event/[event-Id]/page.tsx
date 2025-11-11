@@ -1,7 +1,7 @@
 
 import { Calendar, Clock, MapPin } from 'lucide-react'
 import React from 'react'
-import { Button } from '../../../components/ui/button';
+import { Button } from '../../../../components/ui/button';
 
 type props = {
     title: string,
@@ -39,7 +39,7 @@ export const EventRegistration = (
                     <div className='flex gap-4 md:gap-7 flex-wrap items-center text-white'>
                         <div className='flex justify-center items-center gap-2 py-2 px-4 rounded-lg bg-[#4f4f4f22] backdrop-blur-sm'>
                             <span className='text-green-400'><Calendar /></span>
-                            <span>{date}</span> 
+                            <span>{date}</span>
                         </div>
                         <div className='flex justify-center items-center gap-2 py-2 px-4 rounded-lg bg-[#4f4f4f22]  backdrop-blur-sm'>
                             <span className='text-orange-400'><Clock /></span>
@@ -52,29 +52,29 @@ export const EventRegistration = (
                     </div>
                 </div>
             </div>
-            {/* About */}
-            <h1 className='lg:text-4xl md:text-2xl text-xl max-sm:px-5 px-10 lg:px-20 mb-4'>About This Event</h1>
             {/* Description and registration */}
-            <div className='grid md:grid-cols-[70%_30%] gap-5 lg:gap-10 mx-auto max-sm:px-5 px-10 lg:px-20 mb-6'>
+            <div className='grid md:grid-cols-[70%_30%] gap-5 lg:gap-10 mx-auto max-sm:px-5 px-10 lg:px-20 my-12'>
                 <div>
-                    <div className='rounded-xl border-2 border-gray-200 border-l-5 border-l-[var(--primary)] p-8'>
-                        <p className='text-lg'>{description}</p>
+                    {/* About */}
+                    <h1 className='lg:text-4xl md:text-2xl text-xl mb-8'>About This Event</h1>
+                    <div className='rounded-xl border-2 border-gray-200 border-l-5 border-l-[var(--primary)] p-8 bg-gray-100'>
+                        <pre className='text-lg whitespace-pre-wrap font-sans'>{description}</pre>
                     </div>
                 </div>
                 {/* registration */}
-                <div className=' p-3 shadow-2xl rounded-lg space-y-2 sticky top-[20px]  h-fit'>
-                    <h2 className='text-center md:text-2xl lg:text-4xl text-xl mb-4'>Register Now</h2>
-                    <div className='my-5 mx-2 text-gray-600 border-t-2 border-gray-300 py-4 space-y-3'>
-                        <div>
-                            Fee: <span className="font-semibold text-[var(--foreground)]">{fee}</span>
+                <div className='shadow-2xl rounded-xl space-y-2 sticky top-[20px] h-fit bg-gray-100'>
+                    <h2 className='text-center md:text-2xl lg:text-4xl text-xl p-3'>Register Now</h2>
+                    <div className='text-gray-600 border-t-2 border-[var(--background)] space-y-6 p-4'>
+                        <div className='space-y-2'>
+                            <div>
+                                Fee: <span className="font-semibold text-[var(--foreground)]">{fee}</span>
+                            </div>
+                            <div>
+                                Deadline: <span className="font-semibold text-[var(--foreground)]">{deadline}</span>
+                            </div>
                         </div>
-                        <div>
-                            Deadline: <span className="font-semibold text-[var(--foreground)]">{deadline}</span>
-                        </div>
-                    </div>
-                    {/* Regisration Button */}
-                    <div className='flex items-center justify-center mb-4 p-2'>
-                        <Button variant='primary' className='rounded-lg p-2 hover:scale-103 transition-all duration-200 w-full flex items-center justify-center text-md lg:text-lg'>
+                        {/* Regisration Button */}
+                        <Button variant='primary' className='rounded-lg p-2 py-3 hover:scale-103 transition-all duration-200 w-full flex items-center justify-center text-md lg:text-lg'>
                             Complete Registration
                         </Button>
                     </div>
