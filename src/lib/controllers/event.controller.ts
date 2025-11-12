@@ -11,7 +11,7 @@ import { formDataToJson } from "../utils/formdata-converter";
 export const createEvent = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
     const formData = await req.formData();
-    const { title, description, date, time, location, eventType, navLink } = formDataToJson(formData);
+    const { title, description, date, time, location, eventType, navLink, fee, deadline } = formDataToJson(formData);
 
     if (!title || !description) throw new ApiError(400, "Title and description is required");
 
@@ -31,7 +31,9 @@ export const createEvent = asyncHandler(async (req: NextRequest, context: Middle
         time,
         location,
         eventType,
-        navLink
+        navLink,
+        fee,
+        deadline
     });
 
     return NextResponse.json(new ApiResponse(200, { eventId: event?._id }, "Event created"));
@@ -54,7 +56,7 @@ export const getEvent = asyncHandler(async (req: NextRequest, context: Middlewar
 export const updateEvent = asyncHandler(async (req: NextRequest, context: MiddlewareContext | undefined) => {
     const { userId, files } = context!;
     const formData = await req.formData();
-    const { eventId, title, description, date, time, location, eventType, navLink } = formDataToJson(formData);
+    const { eventId, title, description, date, time, location, eventType, navLink, fee, deadline } = formDataToJson(formData);
 
     if (!title || !description || !eventId) throw new ApiError(400, "Title and description is required");
 
@@ -73,7 +75,9 @@ export const updateEvent = asyncHandler(async (req: NextRequest, context: Middle
         time,
         location,
         eventType,
-        navLink
+        navLink,
+        fee,
+        deadline
     }, { new: true });
 
     // update thumbnail

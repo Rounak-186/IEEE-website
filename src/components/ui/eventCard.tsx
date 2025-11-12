@@ -5,6 +5,7 @@ import { Button } from './button';
 import { Card } from './card';
 import { ChevronsRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils/formatDate';
+import { useRouter } from 'next/navigation';
 
 type EventCardProps = {
     title: string,
@@ -14,6 +15,7 @@ type EventCardProps = {
 }
 
 export default function EventCard({ event }: { event: Record<string, any> }) {
+    const router = useRouter();
     return (
         <Card className='w-[800px]'>
             {/* Cover Image */}
@@ -36,12 +38,10 @@ export default function EventCard({ event }: { event: Record<string, any> }) {
             </div>
             {event?.navLink &&
                 <div className="member-details flex flex-col justify-evenly bg-transparent shadow-lg/30 rounded-xl absolute left-[50%] -bottom-50 w-fit -translate-x-1/2 h-fit mx-auto z-10">
-                    <a target='_blank' href={event?.navLink}>
-                        <Button>
-                            Learn More
-                            <ChevronsRight size={17} />
-                        </Button>
-                    </a>
+                    <Button onClick={() => router.push(`/event/${event?._id}`)}>
+                        Learn More
+                        <ChevronsRight size={17} />
+                    </Button>
                 </div>
             }
         </Card >

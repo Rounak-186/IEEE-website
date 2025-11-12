@@ -36,7 +36,7 @@ export const FullLogoComponent = ({ size = 1 }: { size?: Number }) => {
                     )}
                     style={{ fontSize: `${titlePx}px`, lineHeight: 1 }}
                 >
-                    JGEC IEEE
+                    IEEE
                 </h5>
                 <h6
                     className={clsx(
@@ -106,7 +106,7 @@ export default function NavBar({ navOpts, className, isVisible = true }: NavBarP
                             <Button variant='nav' key={opt.key} className={clsx('p-2 text-gray-600', currentPage === opt.key && "!text-foreground")} onClick={() => handleLinkClick(`/${opt.key}`)}>
                                 {opt.label}
                             </Button>
-                            <div className={clsx('overflow-hidden flex items-center gap-[1px] w-0 h-1 absolute transition-all duration-300 rounded-t-2xl', currentPage === opt.key && "w-17")}>
+                            <div className={clsx('overflow-hidden flex items-center gap-[1px] w-0 h-1 absolute transition-all duration-400 rounded-t-2xl', currentPage === opt.key && "w-17")}>
                                 <div className='flex-1 bg-blue-600 w-full h-full' />
                                 <div className='flex-4 bg-blue-600 w-full h-full' />
                                 <div className='flex-1 bg-blue-600 w-full h-full' />

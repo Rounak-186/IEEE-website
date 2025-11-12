@@ -29,7 +29,9 @@ export default function EventAddPage() {
         eventType: "",
         location: "",
         thumbnail: "",
-        navLink: ""
+        navLink: "",
+        fee: "",
+        deadline: ""
     });
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -211,6 +213,16 @@ export default function EventAddPage() {
                             onChange={e => handleChange(e, 'navLink')}
                             disabled={isLoading}
                         />
+                    </div>
+                    <div className='grid grid-cols-2 gap-2'>
+                        <div>
+                            <div className='mb-2 text-sm'><label htmlFor="event-fee">Fee</label></div>
+                            <Input type="number" id="event-fee" className='form-control' value={formData.fee} onChange={e => handleChange(e, 'fee')} disabled={isLoading} placeholder='Enter event fee'/>
+                        </div>
+                        <div>
+                            <div className='mb-2 text-sm'><label htmlFor="event-deadline">Registration deadline</label></div>
+                            <Input type="date" id="event-deadline" className='form-control' value={formData.deadline} onChange={e => handleChange(e, 'deadline')} disabled={isLoading} />
+                        </div>
                     </div>
                     <div className='flex items-center gap-3'>
                         <label htmlFor="event-image" className='cursor-pointer'>

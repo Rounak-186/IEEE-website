@@ -1,42 +1,52 @@
 import { model, models, Schema } from "mongoose";
 
-const eventSchema = new Schema({
+const eventSchema = new Schema(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     thumbnail: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     date: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     time: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     location: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     eventType: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     navLink: {
-        type: String,
-        default: ""
-    }
-}, { timestamps: true });
+      type: String,
+      default: "",
+    },
+    fee: {
+      type: Number,
+      default: 0,
+    },
+    deadline: {
+      type: Date,
+    },
+  },
+  { timestamps: true }
+);
 
 if (process.env.NODE_ENV === "development" && models.Event) {
-    delete models.Event;
+  delete models.Event;
 }
 
 export const Event = models.Event || model("Event", eventSchema);

@@ -1,10 +1,10 @@
 "use client"
 
-import React, {  useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Bungee } from "next/font/google";
 import clsx from 'clsx';
 import { motion, useScroll, useTransform } from "framer-motion"
-import { SlideUpAnimation } from './sectionAnimation';
+import { SlideDownAnimation, SlideUpAnimation } from './sectionAnimation';
 import NavbarContext from '@/context/navbarContext';
 import NavBar from '../navBar';
 import { Button } from './button';
@@ -716,7 +716,9 @@ export default function IEEEInteractiveCanvas() {
             <div className="absolute inset-0 pointer-events-none">
                 <div className="h-full w-full flex flex-col items-center " ref={sectionRef}>
                     <div className='mb-10 h-fit'>
-                        <NavBar className='w-screen !bg-transparent backdrop-blur-none !border-0 sm:px-10 py-5 pointer-events-auto' />
+                        <SlideDownAnimation>
+                            <NavBar className='w-screen !bg-transparent backdrop-blur-none !border-0 sm:px-10 py-5 pointer-events-auto' />
+                        </SlideDownAnimation>
                     </div>
                     <div className='w-full h-full flex justify-start items-start'>
                         <SlideUpAnimation className="h-full">
@@ -740,25 +742,25 @@ export default function IEEEInteractiveCanvas() {
                                         </p>
 
                                         <p className={clsx("text-2xl text-slate-500", bungeeFont.className)}>
-                                            <span className='text-blue-500 text-4xl'>JGEC</span> Student Branch
+                                            Student Branch <span className='text-blue-500 text-4xl'>JGEC</span>
                                         </p>
                                     </div>
 
                                     <div className="self-end flex gap-4 pt-4 pointer-events-auto max-sm:flex-col">
-                                        <Button 
-                                        className="group relative px-10 py-5 max-sm:p-5 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg justify-center"
-                                        onClick={()=>router.push("/events")}
+                                        <Button
+                                            className="group relative px-10 py-5 max-sm:p-5 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-blue-700 hover:shadow-lg justify-center"
+                                            onClick={() => router.push("/events")}
                                         >
                                             <span className="relative z-10">Explore Innovations</span>
                                             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity"></div>
                                         </Button>
 
-                                        <Button 
-                                        variant='outline' 
-                                        className="px-10 py-5 max-sm:p-5 bg-white text-blue-600 font-semibold rounded-lg border-2 !border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-lg justify-center"
-                                        onClick={()=>router.push("/contact")}
+                                        <Button
+                                            variant='outline'
+                                            className="px-10 py-5 max-sm:p-5 bg-white text-blue-600 font-semibold rounded-lg border-2 !border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-lg justify-center"
+                                            onClick={() => router.push("/contact")}
                                         >
-                                            
+
                                             Join Community
                                         </Button>
                                     </div>
