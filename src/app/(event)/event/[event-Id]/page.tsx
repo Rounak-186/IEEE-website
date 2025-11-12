@@ -85,3 +85,56 @@ export const EventRegistration = (
 };
 
 export default EventRegistration;
+
+const SkelentLoader = () => {
+    return (
+        <div className='mx-auto animate-pulse h-full w-full'>
+            {/* Image and details */}
+            <div className={' p-10 mx-auto relative bg-cover bg-center h-[450px] mb-8 w-full bg-gray-300 '}>
+                {/* event type */}
+                <div className='absolute z-2 inset-0 space-y-8 flex flex-col justify-center p-10'>
+                    {/* Title */}
+                    <div className='flex flex-col justify-c enter gap-3'>
+                        <h2 className='bg-gray-400 w-[300px] h-[70px] rounded-lg'></h2>
+                        <h4 className='bg-gray-400 w-[400px] h-[30px] rounded-lg'></h4>
+                    </div>
+                    {/* date,time,venue */}
+                    <div className='flex gap-4 md:gap-7 flex-wrap items-center text-white'>
+                        <div className='w-[250px] h-[40px] rounded-lg bg-[#4f4f4f22] backdrop-blur-sm'>
+                        </div>
+                        <div className='w-[250px] h-[40px] rounded-lg bg-[#4f4f4f22] backdrop-blur-sm'>
+                        </div>
+                        <div className='w-[250px] h-[40px] rounded-lg bg-[#4f4f4f22] backdrop-blur-sm'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* Description and registration */}
+            <div className='grid md:grid-cols-[70%_30%] gap-5 lg:gap-10 mx-auto max-sm:px-5 px-10 lg:px-20 my-12'>
+                <div>
+                    {/* About */}
+                    <h1 className='w-[300px] h-[60px] mb-8 bg-gray-300 p-8 rounded-lg'></h1>
+                    <div className='rounded-xl border-2 border-gray-200 border-l-5 border-l-[var(--primary)] p-8 bg-gray-100 space-y-2'>
+                        <p className='bg-gray-300 w-[800px] h-[25px]'></p>
+                        <p className='bg-gray-300 w-[880px] h-[25px]'></p>
+                        <p className='bg-gray-300 w-[885px] h-[25px]'></p>
+                        <p className='bg-gray-300 w-[840px] h-[25px]'></p>
+                        <br />
+                        <p className='bg-gray-300 w-[800px] h-[25px]'></p>
+                        <p className='bg-gray-300 w-[690px] h-[25px]'></p>
+                        <p className='bg-gray-300 w-[795px] h-[25px]'></p>
+                        <p className='bg-gray-300 w-[860px] h-[25px]'></p>
+                    </div>
+                </div>
+                {/* registration */}
+                <div className=' rounded-xl flex flex-col justify-end sticky top-[20px] h-[250px] bg-white'>
+                    {/* Regisration Button */}
+                    <div className='rounded-lg h-[200px] w-full '>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+
+}
