@@ -1,4 +1,4 @@
-import { SideNav } from '@/components/AdminNav';
+import { SideNav } from '@/components/ui/AdminNav';
 import { AuthProvider } from '@/context/authContext';
 import { Metadata } from 'next';
 import React from 'react'

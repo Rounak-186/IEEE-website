@@ -4,12 +4,12 @@ import { Geist, Geist_Mono, Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
 // @ts-ignore: allow importing nprogress CSS without type declarations
 import 'nprogress/nprogress.css';
-import NavBar from "@/components/navBar";
+import NavBar from "@/components/ui/navBar";
 import { NavbarProvider } from "@/context/navbarContext";
-import { HeaderNav } from "@/components/HeaderNav";
-import { Footer } from "@/components/Footer";
+import { HeaderNav } from "@/components/ui/HeaderNav";
+import { Footer } from "@/components/ui/Footer";
 import { StoreProvider } from "@/context/storeContext";
-import LoadingProgress from "@/components/PageProgressBar";
+import LoadingProgress from "@/components/ui/PageProgressBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

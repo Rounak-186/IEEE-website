@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { motion, useScroll, useTransform } from "framer-motion"
 import { SlideDownAnimation, SlideUpAnimation } from './sectionAnimation';
 import NavbarContext from '@/context/navbarContext';
-import NavBar from '../navBar';
+import NavBar from './navBar';
 import { Button } from './button';
 import { useRouter } from 'next/navigation';
 

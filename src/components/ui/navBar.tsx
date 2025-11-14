@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from './ui/button';
+import { Button } from './button';
 import clsx from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { Playwrite_US_Modern } from "next/font/google"

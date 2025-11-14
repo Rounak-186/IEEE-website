@@ -1,4 +1,4 @@
-import { AdminAuthContainer } from '@/components/AdminAuthContainer'
+import { AdminAuthContainer } from '@/components/ui/AdminAuthContainer'
 import React from 'react'
 
 function AccessAdminLayout({ children }: { children: React.ReactNode }) {
