@@ -2,7 +2,7 @@
 
 import { Calendar, Clock, IndianRupee, MapPin } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { Button } from '../../../../components/ui/button';
+import { Button } from '../../../../../components/ui/button';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { formatDate } from '@/lib/utils/formatDate';
