@@ -1,10 +1,14 @@
 "use client"
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { PopupBox } from '@/components/ui/popupBox';
+import { Select } from '@/components/ui/select';
 import { useAuth } from '@/context/authContext';
 import axios from 'axios';
 import { Edit, Pen, Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 export default function AccessPage() {
     const router = useRouter();
@@ -33,6 +37,28 @@ export default function AccessPage() {
         router.push('/admin/auth/login');
     };
 
+    // handle password update popup
+    const [passwordForm, setPasswordForm] = useState({ currentPassword: "", newPassword: "" });
+    const [isPasswordPopupOpen, setIsPasswordPopupOpen] = useState(false);
+    const [isPasswordUpdating, setIsPasswordUpdating] = useState(false);
+    const handlePasswordUpdate = async () => {
+        if (!passwordForm.currentPassword || !passwordForm.newPassword) return;
+        try {
+            setIsPasswordUpdating(true);
+            await axios.patch("/api/user/update-password", passwordForm)
+                .then(() => {
+                    toast.success("Password updated successfully");
+                    setIsPasswordPopupOpen(false);
+                    setPasswordForm({ currentPassword: "", newPassword: "" });
+                })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data.message);
+            }
+        }
+        setIsPasswordUpdating(false);
+    }
+
 
     return (
         <div className='space-y-7'>
@@ -46,6 +72,8 @@ export default function AccessPage() {
                 <p><strong>Admin Name:</strong> {user?.userName}</p>
                 <p><strong>Email:</strong> {user?.email}</p>
                 <p><strong>Role:</strong> {user?.role}</p>
+
+                <Button className='mt-6' onClick={() => setIsPasswordPopupOpen(true)}>Update password</Button>
             </div>
             {/* Other Authorised member Details  */}
             <div>
@@ -68,11 +96,49 @@ export default function AccessPage() {
                 </div>
                 {userList?.length === 0 && <div className='text-center'>No users found!</div>}
             </div>
+
+            <PopupBox className='p-3 !max-w-[30em] w-full space-y-6' openState={isPasswordPopupOpen} onClose={() => setIsPasswordPopupOpen(false)}>
+                <h5 className='text-xl mb-4'>Update password</h5>
+
+                <div className='space-y-2'>
+                    <Input type='password' placeholder='Enter current password' value={passwordForm.currentPassword} onChange={e => setPasswordForm(prev => ({ ...prev, currentPassword: e }))} disabled={isPasswordUpdating} />
+                    <Input type='password' placeholder='Enter new password' value={passwordForm.newPassword} onChange={e => setPasswordForm(prev => ({ ...prev, newPassword: e }))} disabled={isPasswordUpdating} />
+                </div>
+
+                <div className='flex items-center gap-3 justify-end'>
+                    <Button variant='nav' onClick={() => setIsPasswordPopupOpen(false)} disabled={isPasswordUpdating}>Cancel</Button>
+                    <Button onClick={handlePasswordUpdate} disabled={isPasswordUpdating}>{isPasswordUpdating ? "Updating..." : "Update password"}</Button>
+                </div>
+
+            </PopupBox>
         </div>
     )
 };
 
 const AuthorizedMemberCard = ({ data }: { data: Record<string, any> }) => {
+    // handle role
+    const [userRole, setUserRole] = useState(data?.role);
+
+    // handle user role popup
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isRoleUpdating, setIsRoleUpdating] = useState(false);
+
+    const handleRoleUpdate = async (role: string) => {
+        try {
+            if (!data) return;
+            setIsRoleUpdating(true);
+            await axios.post('/api/user/update-role', { userId: data?._id, role })
+                .then(() => {
+                    setUserRole(role);
+                    setIsPopupOpen(false);
+                    toast.success("User role updated");
+                });
+        } catch (error) {
+            toast.error("Failed to update user role.");
+        }
+        setIsRoleUpdating(false);
+    }
+
     return (
         <div className="flex p-2 px-4 bg-white rounded-lg shadow-md justify-between items-center gap-2">
             <div>
@@ -80,12 +146,23 @@ const AuthorizedMemberCard = ({ data }: { data: Record<string, any> }) => {
                 <p>Email: {data?.email}</p>
             </div>
             <div className='flex gap-4'>
-                <p className=' bg-gray-200 py-2 px-4 rounded-md flex items-center justify-center w-[250px] m-0'> {data?.role}</p>
-                <Button variant='success'>
+                <p className=' bg-gray-200 py-2 px-4 rounded-md flex items-center justify-center w-[250px] m-0'> {userRole}</p>
+                <Button variant='success' onClick={() => setIsPopupOpen(true)}>
                     <Pen size={15} />
                     Edit Role
                 </Button>
             </div>
+
+            <PopupBox className='p-3 !max-w-[30em] w-full' openState={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+                <h5 className='text-xl mb-4'>Update user role</h5>
+                <Select
+                    placeholder='Select user role'
+                    value={userRole}
+                    options={["admin", "member"]}
+                    onChange={handleRoleUpdate} disabled={isRoleUpdating}
+                />
+                {isRoleUpdating && <p className='text-sm text-green-500 mt-4 text-center'>Updating role...</p>}
+            </PopupBox>
 
         </div>
     )
